@@ -10,7 +10,7 @@ class FactorySection {
 
 }
 
-class FactoryRecipe<TBuilding extends Building, TItem extends Item> {
+export class FactoryRecipe<TBuilding extends Building, TItem extends Item> {
     item: TItem;
     name: string;
     building: TBuilding;

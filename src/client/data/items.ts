@@ -1,15 +1,15 @@
 export enum Item {
-    Water,
-    IronOre,
-    IronIngot,
-    IronPlate,
-    IronRod,
-    Screw,
-    CopperOre,
-    CopperIngot,
-    SteelIngot,
-    SteelBeam,
-    Wire,
-    Cable,
-    Plastic
+    Water = "Water",
+    IronOre = "Iron Ore",
+    IronIngot = "Iron Ingot",
+    IronPlate = "Iron Plate",
+    IronRod = "Iron Rod",
+    Screw = "Screw",
+    CopperOre = "Copper Ore",
+    CopperIngot = "Copper Ingot",
+    SteelIngot = "Steel Ingot",
+    SteelBeam = "Steel Beam",
+    Wire = "Wire",
+    Cable = "Cable",
+    Plastic = "Plastic"
 }
