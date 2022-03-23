@@ -10,7 +10,7 @@ export interface Recipe {
     timeSeconds: number
 }
 
-const recipes: Recipe[] = [
+export const recipes: Recipe[] = [
     {
         item: Item.IronIngot,
         name: "Iron Ingot",

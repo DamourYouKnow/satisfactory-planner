@@ -28,7 +28,7 @@ export default function() {
                 inlineSources: !prod
             }),
             babel({
-                exclude: ['*.html'],
+                exclude: ['*.html', '**/node_modules/**'],
                 extensions: [
                     ...DEFAULT_EXTENSIONS,
                     '.ts',

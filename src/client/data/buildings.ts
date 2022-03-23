@@ -1,7 +1,7 @@
 export enum Building {
-    Smelter,
-    Constructor,
-    Assembler,
-    Refinery,
-    Foundry
+    Smelter = "Smelter",
+    Constructor = "Constructor",
+    Assembler = "Assembler",
+    Refinery = "Refinery",
+    Foundry = "Foundry"
 }
