@@ -1,7 +1,7 @@
 import { Item } from "./items";
 import { Building } from './buildings';
 
-interface Recipe {
+export interface Recipe {
     item: Item,
     name: string,
     building: Building,
