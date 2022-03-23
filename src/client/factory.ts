@@ -3,11 +3,12 @@ import { Recipe } from './data/recipes';
 import { Item } from './data/items';
 
 class Factory {
-
+    name: string;
+    sections: FactorySection;
 }
 
 class FactorySection {
-
+    groups: FactoryBuildingGroup[];
 }
 
 export class FactoryRecipe<TBuilding extends Building, TItem extends Item> {
@@ -61,10 +62,10 @@ class FactoryBuilding<TBuilding extends Building, TItem extends Item> {
     }
 }
 
-class FactoryBuildingGroup<TBuilding extends Building, TItem extends Item> {
-    buildings: FactoryBuilding<TBuilding, TItem>[];
+class FactoryBuildingGroup {
+    buildings: FactoryBuilding<Building, Item>[];
 
-    constructor (buildings: FactoryBuilding<TBuilding, TItem>[]) {
+    constructor (buildings: FactoryBuilding<Building, Item>[]) {
         this.buildings = buildings;
     }
 }
