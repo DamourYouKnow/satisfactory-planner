@@ -1,7 +1,11 @@
 import { Building } from './data/buildings';
 import { Item } from './data/items';
-import { Recipe, recipes } from './data/recipes';
-import { FactoryRecipe } from './factory';
+import { recipes } from './data/recipes';
+import { 
+    FactoryRecipe,
+    FactoryBuilding,
+    FactoryBuildingGroup
+} from './factory';
 
 window.onload = function() {
     loadBuildingDropdown();
@@ -23,8 +27,10 @@ window.onload = function() {
             recipe.item,
             recipe
         );
+        const building = new FactoryBuilding(factoryRecipe);
+        const group = new FactoryBuildingGroup(building, 1);
 
-        document.body.appendChild(inputTable(factoryRecipe));
+        document.body.appendChild(inputTable(group));
     };
 };
 
@@ -66,9 +72,9 @@ function loadDropdown(dropdown: HTMLSelectElement, items: string[]) {
     }
 }
 
-function inputTable(recipe: FactoryRecipe<Building, Item>): HTMLTableElement {
+function inputTable(group: FactoryBuildingGroup): HTMLTableElement {
     const table = document.createElement('table');
-    for (const input of recipe.inputs) {
+    for (const input of group.building.recipe.inputs) {
         const row = document.createElement('tr');
 
         const imageCell = document.createElement('td');
