@@ -7,17 +7,20 @@ body {
 }
 
 .dropdown {
+    width: 15em;
     display: inline-block;
-    background-color: aquamarine;
+    background-color: #5F668C;
 }
 
 .dropdown > ul {
+    width: 15em;
     max-height: 20em;
     overflow-y: scroll;
     padding: 0;
     margin: 0;
     position: absolute;
     background-color: inherit;
+    border-top: solid 1px black;
 }
 
 .dropdown-item {
@@ -26,8 +29,21 @@ body {
     padding-bottom: 0.5em;
     padding-left: 1em;
     padding-right: 1em;
+    color: white;
 }
 .dropdown-item:hover {
-    background-color: burlywood;
+    background-color: #FA9549;
+    cursor: pointer
+}
+
+.dropdown-item-selected {
+    color: white;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+    background-color: #5F668C;
+}
+.dropdown-item-selected:hover {
     cursor: pointer
 }
