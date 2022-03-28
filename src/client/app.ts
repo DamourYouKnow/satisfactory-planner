@@ -6,6 +6,7 @@ import {
     FactoryBuilding,
     FactoryBuildingGroup
 } from './factory';
+import { Dropdown } from './ui';
 
 window.onload = function() {
     loadBuildingDropdown();
@@ -47,7 +48,7 @@ function loadBuildingDropdown(item?: Item) {
     }
 
     loadDropdown(
-        document.getElementById('building-select') as HTMLSelectElement,
+        document.getElementById('building-select') as HTMLDivElement,
         Array.from(buildingSet).map(String)
     );
 }
@@ -58,18 +59,20 @@ function loadRecipeDropdown(building?: Building) {
     });
 
     loadDropdown(
-        document.getElementById('item-select') as HTMLSelectElement,
+        document.getElementById('item-select') as HTMLDivElement,
         Array.from(filteredRecipes).map((recipe) => recipe.name)
     );
 }
 
-function loadDropdown(dropdown: HTMLSelectElement, items: string[]) {
-    dropdown.innerHTML = '';
-    for (const item of items) {
-        const option = document.createElement('option');
-        option.textContent = item;
-        dropdown.appendChild(option);
-    }
+function loadDropdown(elem: HTMLDivElement, items: string[]) {
+    const dropdown = new Dropdown(elem);
+    dropdown.items = items.map((item) => {
+        return {
+            label: item,
+            value: item,
+        };
+    });
+    dropdown.update();
 }
 
 function inputTable(group: FactoryBuildingGroup): HTMLTableElement {
