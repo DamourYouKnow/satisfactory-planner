@@ -39,6 +39,14 @@ export class Dropdown extends Component {
         };
         this.element.appendChild(this.selectedElem);
 
+        const selectedItemLabel = document.createElement('span');
+        selectedItemLabel.classList.add('selected-item-label');
+        this.selectedElem.appendChild(selectedItemLabel);
+
+        const dropIcon = document.createElement('i');
+        dropIcon.classList.add('fa-solid', 'fa-angle-down', 'dropdown-arrow');
+        this.selectedElem.appendChild(dropIcon);
+
         this.itemListElem = document.createElement('ul');
         this.element.appendChild(this.itemListElem);
 
@@ -91,7 +99,10 @@ export class Dropdown extends Component {
 
     select(item: DropdownItem) {
         this.selected = item;
-        this.selectedElem.textContent = this.selected.label;
+        const labelElem = this.selectedElem.getElementsByClassName(
+            'selected-item-label'
+        ).item(0);
+        labelElem.textContent = this.selected.label;
         if (this.onSelect) {
             this.onSelect(this.selected);
         }
