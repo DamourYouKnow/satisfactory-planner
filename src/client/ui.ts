@@ -1,3 +1,5 @@
+import * as dom from './dom';
+
 abstract class Component {
     element: HTMLElement;
 
@@ -53,6 +55,13 @@ export class Dropdown extends Component {
 
         this.itemListElem = document.createElement('ul');
         this.element.appendChild(this.itemListElem);
+
+        window.addEventListener('click', (event: MouseEvent) => { 
+            const target = event.target as HTMLElement;
+            if (!this.element.contains(target)) {
+                this.collapse();
+            }
+        });
 
         this.select(this.items[0]);
 
