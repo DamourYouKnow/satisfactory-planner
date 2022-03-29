@@ -8,7 +8,7 @@ abstract class Component {
     abstract update(): void;
 }
 
-interface DropdownItem {
+export interface DropdownItem {
     label: string;
     value: string;
     image?: string;
@@ -33,14 +33,18 @@ export class Dropdown extends Component {
         this.element.classList.add('dropdown');
 
         this.selectedElem = document.createElement('div');
-        this.selectedElem.classList.add('dropdown-item-selected');
+        this.selectedElem.classList.add('dropdown-selected-item');
         this.selectedElem.onclick = () => {
             this.switch();
         };
         this.element.appendChild(this.selectedElem);
 
+        const selectedItemImage = document.createElement('img');
+        selectedItemImage.alt = '';
+        this.selectedElem.appendChild(selectedItemImage);
+
         const selectedItemLabel = document.createElement('span');
-        selectedItemLabel.classList.add('selected-item-label');
+        selectedItemLabel.classList.add('dropdown-selected-item-label');
         this.selectedElem.appendChild(selectedItemLabel);
 
         const dropIcon = document.createElement('i');
@@ -57,14 +61,15 @@ export class Dropdown extends Component {
             itemElem.classList.add('dropdown-item');
             itemElem.dataset.value = item.value;
 
+            const image = document.createElement('img');
             if (item.image) {
-                const image = document.createElement('image');
-                image.setAttribute('src', item.image);
-                image.setAttribute('alt', '');
-                itemElem.appendChild(image);
+                image.src = item.image;
             }
+            image.alt = '';
+            itemElem.appendChild(image);
             
             const labelDiv = document.createElement('div');
+            labelDiv.classList.add('dropdown-item-label');
             labelDiv.textContent = item.label;
             itemElem.appendChild(labelDiv);
             itemElem.onclick = () => {
@@ -100,9 +105,15 @@ export class Dropdown extends Component {
     select(item: DropdownItem) {
         this.selected = item;
         const labelElem = this.selectedElem.getElementsByClassName(
-            'selected-item-label'
+            'dropdown-selected-item-label'
         ).item(0);
         labelElem.textContent = this.selected.label;
+
+        const image = this.selectedElem
+            .getElementsByTagName('img')
+            .item(0);
+        image.src = this.selected.image || '';
+
         if (this.onSelect) {
             this.onSelect(this.selected);
         }

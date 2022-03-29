@@ -6,7 +6,7 @@ import {
     FactoryBuilding,
     FactoryBuildingGroup
 } from './factory';
-import { Dropdown } from './ui';
+import { Dropdown, DropdownItem } from './ui';
 
 window.onload = function() {
     loadBuildingDropdown();
@@ -49,7 +49,12 @@ function loadBuildingDropdown(item?: Item) {
 
     loadDropdown(
         document.getElementById('building-select') as HTMLDivElement,
-        Array.from(buildingSet).map(String)
+        Array.from(buildingSet).map((building) => {
+            return {
+                value: building,
+                label: building
+            };
+        })
     );
 }
 
@@ -60,18 +65,19 @@ function loadRecipeDropdown(building?: Building) {
 
     loadDropdown(
         document.getElementById('item-select') as HTMLDivElement,
-        Array.from(filteredRecipes).map((recipe) => recipe.name)
+        Array.from(filteredRecipes).map((recipe) => {
+            return {
+                value: recipe.item,
+                label: recipe.name,
+                image: `images/${recipe.item}.png`
+            };
+        })
     );
 }
 
-function loadDropdown(elem: HTMLDivElement, items: string[]) {
+function loadDropdown(elem: HTMLDivElement, items: DropdownItem[]) {
     const dropdown = new Dropdown(elem);
-    dropdown.items = items.map((item) => {
-        return {
-            label: item,
-            value: item,
-        };
-    });
+    dropdown.items = items;
     dropdown.update();
 }
 
