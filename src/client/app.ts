@@ -2,6 +2,8 @@ import { Building } from './data/buildings';
 import { Item } from './data/items';
 import { recipes } from './data/recipes';
 import { 
+    Factory,
+    FactorySection,
     FactoryRecipe,
     FactoryBuilding,
     FactoryBuildingGroup
@@ -10,14 +12,17 @@ import { Dropdown, DropdownItem } from './ui';
 import { dom } from './dom';
 
 window.onload = function() {
-    const app = new App();
+    new App();
 };
 
 class App {
+    factory: Factory;
     buildingDropdown: Dropdown;
     recipeDropdown: Dropdown;
 
     constructor() {
+        this.factory = new Factory();
+
         this.buildingDropdown = new Dropdown(dom().id('building-select'));
 
         this.recipeDropdown = new Dropdown(dom().id('recipe-select'));
@@ -25,6 +30,9 @@ class App {
 
         this.loadBuildingDropdown();
         this.loadRecipeDropdown();
+
+        const addBuildingBtn = dom().id<HTMLButtonElement>('add-building-btn');
+        addBuildingBtn.onclick = () => this.addBuilding();
     }
 
     private loadBuildingDropdown(item?: Item) {
@@ -78,6 +86,24 @@ class App {
 
     private handleRecipeSelect(item: DropdownItem) {
         return null;
+    }
+
+    private addBuilding() {
+        const item = this.recipeDropdown.selected;
+
+        const recipe = recipes.find((recipe) => recipe.name == item.value);
+        const factoryRecipe = new FactoryRecipe(
+            recipe.building,
+            recipe.item,
+            recipe
+        );
+        const building = new FactoryBuilding(factoryRecipe);
+        
+        const section = new FactorySection();
+        const group = new FactoryBuildingGroup(building, 1);
+        section.groups.push(group);
+
+        dom().id('report-view').appendChild(this.inputTable(group));
     }
 
     private inputTable(group: FactoryBuildingGroup): HTMLTableElement {

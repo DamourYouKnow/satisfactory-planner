@@ -69,6 +69,7 @@ export class Dropdown extends Component {
             const itemElem = document.createElement('li');
             itemElem.classList.add('dropdown-item');
             itemElem.dataset.value = item.value;
+            itemElem.dataset.label = item.label;
 
             const image = document.createElement('img');
             if (item.image) {
@@ -130,7 +131,7 @@ export class Dropdown extends Component {
 
     private handleClick(elem: HTMLLIElement) {
         const selection = this.items.find((item) => {
-            return item.value == elem.dataset.value;
+            return item.label == elem.dataset.label;
         });
         this.select(selection);
     }

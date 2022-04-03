@@ -4,11 +4,20 @@ import { Item } from './data/items';
 
 export class Factory {
     name: string;
-    sections: FactorySection;
+    sections: FactorySection[];
+
+    constructor() {
+        this.name = 'My Factory';
+        this.sections = [];
+    }
 }
 
 export class FactorySection {
     groups: FactoryBuildingGroup[];
+
+    constructor() {
+        this.groups = [];
+    }
 }
 
 export class FactoryRecipe<TBuilding extends Building, TItem extends Item> {
