@@ -1,4 +1,4 @@
-import * as dom from './dom';
+import { dom } from './dom';
 
 abstract class Component {
     element: HTMLElement;
@@ -113,14 +113,13 @@ export class Dropdown extends Component {
 
     select(item: DropdownItem) {
         this.selected = item;
-        const labelElem = this.selectedElem.getElementsByClassName(
+        const labelElem = dom(this.selectedElem).classname(
             'dropdown-selected-item-label'
-        ).item(0);
+        )[0];
         labelElem.textContent = this.selected.label;
 
-        const image = this.selectedElem
-            .getElementsByTagName('img')
-            .item(0);
+        const image = dom(this.selectedElem)
+            .tagname<HTMLImageElement>('img')[0];
         image.src = this.selected.image || '';
 
         if (this.onSelect) {

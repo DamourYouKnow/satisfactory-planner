@@ -7,32 +7,11 @@ import {
     FactoryBuildingGroup
 } from './factory';
 import { Dropdown, DropdownItem } from './ui';
+import { dom } from './dom';
 
 window.onload = function() {
     loadBuildingDropdown();
     loadRecipeDropdown();
-
-    const addBuildingBtn = document.getElementById(
-        'add-building-btn'
-    ) as HTMLButtonElement;
-    addBuildingBtn.onclick = function() {
-        const recipeDropdown = document.getElementById(
-            'item-select'
-        ) as HTMLSelectElement;
-
-        const recipe = recipes.find((recipe) => {
-            return recipe.name == recipeDropdown.value;
-        });
-        const factoryRecipe = new FactoryRecipe(
-            recipe.building,
-            recipe.item,
-            recipe
-        );
-        const building = new FactoryBuilding(factoryRecipe);
-        const group = new FactoryBuildingGroup(building, 1);
-
-        document.body.appendChild(inputTable(group));
-    };
 };
 
 function loadBuildingDropdown(item?: Item) {
@@ -47,8 +26,9 @@ function loadBuildingDropdown(item?: Item) {
         }
     }
 
+    const dropdown = new Dropdown(dom().id('building-select'));
     loadDropdown(
-        document.getElementById('building-select') as HTMLDivElement,
+        dropdown,
         Array.from(buildingSet).map((building) => {
             return {
                 value: building,
@@ -63,8 +43,10 @@ function loadRecipeDropdown(building?: Building) {
         return recipe.building == building;
     });
 
+    const dropdown = new Dropdown(dom().id('recipe-select'));
+    dropdown.onSelect = handleRecipeSelect;
     loadDropdown(
-        document.getElementById('item-select') as HTMLDivElement,
+        dropdown,
         Array.from(filteredRecipes).map((recipe) => {
             return {
                 value: recipe.item,
@@ -75,10 +57,13 @@ function loadRecipeDropdown(building?: Building) {
     );
 }
 
-function loadDropdown(elem: HTMLDivElement, items: DropdownItem[]) {
-    const dropdown = new Dropdown(elem);
+function loadDropdown(dropdown: Dropdown, items: DropdownItem[]) {
     dropdown.items = items;
     dropdown.update();
+}
+
+function handleRecipeSelect(item: DropdownItem) {
+    return null;
 }
 
 function inputTable(group: FactoryBuildingGroup): HTMLTableElement {
