@@ -20,12 +20,18 @@ export class FactorySection {
     }
 }
 
+export interface ItemFlow {
+    item: Item,
+    quantity: number,
+    ratePerMinute: number
+}
+
 export class FactoryRecipe<TBuilding extends Building, TItem extends Item> {
     item: TItem;
     name: string;
     building: TBuilding;
-    inputs: { item: Item, quantity: number, ratePerMinute: number }[];
-    outputs: { item: Item, quantity: number, ratePerMinute: number }[];
+    inputs: ItemFlow[];
+    outputs: ItemFlow[];
     timeSeconds: number;
 
     constructor(building: TBuilding, item: TItem, recipe: Recipe) {

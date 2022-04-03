@@ -6,7 +6,8 @@ import {
     FactorySection,
     FactoryRecipe,
     FactoryBuilding,
-    FactoryBuildingGroup
+    FactoryBuildingGroup,
+    ItemFlow
 } from './factory';
 import { Dropdown, DropdownItem } from './ui';
 import { dom } from './dom';
@@ -104,28 +105,38 @@ class App {
         section.groups.push(group);
 
         dom().id('report-view').appendChild(this.inputTable(group));
+        dom().id('report-view').appendChild(this.outputTable(group));
     }
 
     private inputTable(group: FactoryBuildingGroup): HTMLTableElement {
-        const table = document.createElement('table');
-        for (const input of group.building.recipe.inputs) {
+        return flowTable(group.building.recipe.inputs);
+    }
+
+    private outputTable(group: FactoryBuildingGroup): HTMLTableElement {
+        return flowTable(group.building.recipe.outputs);
+    }
+}
+
+function flowTable(itemFlows: ItemFlow[]): HTMLTableElement {
+const table = document.createElement('table');
+        for (const itemFlow of itemFlows) {
             const row = document.createElement('tr');
 
             const imageCell = document.createElement('td');
             const image = document.createElement('img') as HTMLImageElement;
-            image.src = `images/${input.item}.png`;
+            image.src = `images/${itemFlow.item}.png`;
             imageCell.appendChild(image);
             
             const itemCell = document.createElement('td');
             const itemNameDiv = document.createElement('div');
-            itemNameDiv.textContent = String(input.item);
+            itemNameDiv.textContent = String(itemFlow.item);
             const itemQuantityDiv = document.createElement('div');
-            itemQuantityDiv.textContent = String(input.quantity);
+            itemQuantityDiv.textContent = String(itemFlow.quantity);
             itemCell.appendChild(itemNameDiv);
             itemCell.appendChild(itemQuantityDiv);
 
             const rateCell = document.createElement('td');
-            rateCell.textContent = String(`${input.ratePerMinute} / min`);
+            rateCell.textContent = String(`${itemFlow.ratePerMinute} / min`);
 
             row.appendChild(imageCell);
             row.appendChild(itemCell);
@@ -135,5 +146,4 @@ class App {
         }
 
         return table;
-    }
 }
