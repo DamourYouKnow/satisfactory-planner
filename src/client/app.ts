@@ -91,7 +91,7 @@ class App {
     private addBuilding() {
         const item = this.recipeDropdown.selected;
 
-        const recipe = recipes.find((recipe) => recipe.name == item.value);
+        const recipe = recipes.find((recipe) => recipe.name == item.label);
         const factoryRecipe = new FactoryRecipe(
             recipe.building,
             recipe.item,
@@ -112,6 +112,9 @@ class App {
             const row = document.createElement('tr');
 
             const imageCell = document.createElement('td');
+            const image = document.createElement('img') as HTMLImageElement;
+            image.src = `images/${input.item}.png`;
+            imageCell.appendChild(image);
             
             const itemCell = document.createElement('td');
             const itemNameDiv = document.createElement('div');
