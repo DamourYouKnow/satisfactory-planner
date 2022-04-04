@@ -104,46 +104,67 @@ class App {
         const group = new FactoryBuildingGroup(building, 1);
         section.groups.push(group);
 
-        dom().id('report-view').appendChild(this.inputTable(group));
-        dom().id('report-view').appendChild(this.outputTable(group));
-    }
+        const groupDiv = document.createElement('div');
+        groupDiv.classList.add('building-group');
 
-    private inputTable(group: FactoryBuildingGroup): HTMLTableElement {
-        return flowTable(group.building.recipe.inputs);
-    }
+        groupDiv.appendChild(flowTable(group.building.recipe.inputs));
+        groupDiv.appendChild(buildingGroupInfo(group));
+        groupDiv.appendChild(flowTable(group.building.recipe.outputs));
 
-    private outputTable(group: FactoryBuildingGroup): HTMLTableElement {
-        return flowTable(group.building.recipe.outputs);
+        dom().id('report-view').appendChild(groupDiv);
     }
 }
 
+function buildingGroupInfo(
+    group: FactoryBuildingGroup
+): HTMLDivElement {
+    const infoDiv = document.createElement('div');
+    infoDiv.classList.add('building-group-info');
+
+    const image = document.createElement('img');
+    image.src = `images/${group.building.building}.png`;
+    infoDiv.appendChild(image);
+
+    const buildingNameDiv = document.createElement('div');
+    buildingNameDiv.textContent = group.building.building;
+    infoDiv.appendChild(buildingNameDiv);
+
+    const buildingCountDiv = document.createElement('div');
+    buildingCountDiv.textContent = `x ${group.count}`;
+    infoDiv.appendChild(buildingCountDiv);
+
+    return infoDiv;
+}
+
 function flowTable(itemFlows: ItemFlow[]): HTMLTableElement {
-const table = document.createElement('table');
-        for (const itemFlow of itemFlows) {
-            const row = document.createElement('tr');
+    const table = document.createElement('table');
+    table.classList.add('item-flow-table');
+    for (const itemFlow of itemFlows) {
+        const row = document.createElement('tr');
 
-            const imageCell = document.createElement('td');
-            const image = document.createElement('img') as HTMLImageElement;
-            image.src = `images/${itemFlow.item}.png`;
-            imageCell.appendChild(image);
-            
-            const itemCell = document.createElement('td');
-            const itemNameDiv = document.createElement('div');
-            itemNameDiv.textContent = String(itemFlow.item);
-            const itemQuantityDiv = document.createElement('div');
-            itemQuantityDiv.textContent = String(itemFlow.quantity);
-            itemCell.appendChild(itemNameDiv);
-            itemCell.appendChild(itemQuantityDiv);
+        const imageCell = document.createElement('td');
+        const image = document.createElement('img') as HTMLImageElement;
+        image.src = `images/${itemFlow.item}.png`;
+        imageCell.appendChild(image);
+        
+        const itemCell = document.createElement('td');
+        const itemNameDiv = document.createElement('div');
+        itemNameDiv.textContent = String(itemFlow.item);
+        const itemQuantityDiv = document.createElement('div');
+        itemNameDiv.classList.add('item-flow-quantity');
+        itemQuantityDiv.textContent = `x ${itemFlow.quantity}`;
+        itemCell.appendChild(itemNameDiv);
+        itemCell.appendChild(itemQuantityDiv);
 
-            const rateCell = document.createElement('td');
-            rateCell.textContent = String(`${itemFlow.ratePerMinute} / min`);
+        const rateCell = document.createElement('td');
+        rateCell.textContent = String(`${itemFlow.ratePerMinute} / min`);
 
-            row.appendChild(imageCell);
-            row.appendChild(itemCell);
-            row.appendChild(rateCell);
+        row.appendChild(imageCell);
+        row.appendChild(itemCell);
+        row.appendChild(rateCell);
 
-            table.appendChild(row);
-        }
+        table.appendChild(row);
+    }
 
-        return table;
+    return table;
 }

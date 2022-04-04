@@ -80,3 +80,30 @@ body {
     float: right;
     padding-top: 0.5em;
 }
+
+.building-group {
+    color: white;
+    background-color: #5F668C;
+    width: 100%;
+    max-width: 50em;
+}
+.building-group-info {
+    display: inline-block;
+}
+.building-group-info img {
+    height: 4em;
+}
+.item-flow-table {
+    display: inline-block;
+}
+.item-flow-table td {
+    padding: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+.item-flow-quantity {
+    align-content: right;
+}
+.item-flow-table img {
+    height: 3em;
+}
