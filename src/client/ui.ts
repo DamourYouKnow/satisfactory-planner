@@ -21,6 +21,7 @@ export class Dropdown extends Component {
     selected: DropdownItem;
     private selectedElem: HTMLDivElement;
     private itemListElem: HTMLUListElement;
+    private selectedItemLabel: HTMLSpanElement;
     expanded: boolean;
     onSelect: (item: DropdownItem) => void;
 
@@ -45,9 +46,10 @@ export class Dropdown extends Component {
         selectedItemImage.alt = '';
         this.selectedElem.appendChild(selectedItemImage);
 
-        const selectedItemLabel = document.createElement('span');
-        selectedItemLabel.classList.add('dropdown-selected-item-label');
-        this.selectedElem.appendChild(selectedItemLabel);
+        this.selectedItemLabel = document.createElement('span');
+        this.selectedItemLabel.classList.add('dropdown-selected-item-label');
+        this.selectedItemLabel.oninput = () => this.handleSearch();
+        this.selectedElem.appendChild(this.selectedItemLabel);
 
         const dropIcon = document.createElement('i');
         dropIcon.classList.add('fa-solid', 'fa-angle-down', 'dropdown-arrow');
@@ -88,6 +90,13 @@ export class Dropdown extends Component {
 
             this.itemListElem.appendChild(itemElem);
         }
+
+        const noResultsItem = document.createElement('li');
+        noResultsItem.classList.add(
+            'dropdown-no-results', 'dropdown-item', 'hidden'
+        );
+        noResultsItem.textContent = 'No results...';
+        this.itemListElem.appendChild(noResultsItem);
     }
 
     expand() {
@@ -107,8 +116,11 @@ export class Dropdown extends Component {
 
         if (this.expanded) {
             this.itemListElem.classList.remove('hidden');
+            this.selectedItemLabel.setAttribute('contenteditable', 'true');
+            this.selectedItemLabel.focus();
         } else {
             this.itemListElem.classList.add('hidden');
+            this.selectedItemLabel.removeAttribute('contenteditable');
         }
     }
 
@@ -134,5 +146,29 @@ export class Dropdown extends Component {
             return item.label == elem.dataset.label;
         });
         this.select(selection);
+    }
+
+    private handleSearch() {
+        if (this.expanded) {
+            const search = this.selectedItemLabel.textContent;
+            const options = dom(this.itemListElem).tagname<HTMLLIElement>('li');
+            options.forEach((option) => option.classList.remove('hidden'));
+            const matches = options.filter((option) => {
+                const label = option.dataset.label || option.dataset.value;
+                if (!label) return false;
+                return !label.toLowerCase().includes(search.toLowerCase());
+            });
+            matches.forEach((option) => option.classList.add('hidden'));
+            const noResults = dom(this.itemListElem).classname(
+                'dropdown-no-results'
+            )[0];
+            if (matches.length > 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        } else {
+            return;
+        }
     }
 }
