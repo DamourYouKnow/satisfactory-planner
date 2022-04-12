@@ -54,7 +54,8 @@ class App {
             Array.from(buildingSet).map((building) => {
                 return {
                     value: building,
-                    label: building
+                    label: building,
+                    image: `images/${building}.png`
                 };
             })
         );
