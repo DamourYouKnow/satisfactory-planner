@@ -2,10 +2,6 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-[contenteditable] {
-    outline: 0px solid transparent;
-}
-
 .hidden {
     display: none;
 }

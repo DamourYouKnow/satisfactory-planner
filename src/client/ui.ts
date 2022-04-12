@@ -22,13 +22,27 @@ export class Dropdown extends Component {
     private selectedElem: HTMLDivElement;
     private itemListElem: HTMLUListElement;
     private selectedItemLabel: HTMLSpanElement;
+    private search: string | null;
     expanded: boolean;
     onSelect: (item: DropdownItem) => void;
+
+    static allowedCharacters = new Set<string>([
+        ...'abcdefghijklmnopqrstuvwxyz'.split(''),
+        ...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
+        ...[' ', '-', 'Backspace'],
+    ]);
 
     constructor(element: HTMLDivElement) {
         super(element);
         this.expanded = false;
+        this.search = null;
         this.element.classList.add('dropdown');
+
+        document.addEventListener('keydown', (event) => {
+            if (this.expanded && Dropdown.allowedCharacters.has(event.key)) {
+                this.handleSearchInput(event);
+            }
+        });
     }
 
     update() {
@@ -48,7 +62,6 @@ export class Dropdown extends Component {
 
         this.selectedItemLabel = document.createElement('span');
         this.selectedItemLabel.classList.add('dropdown-selected-item-label');
-        this.selectedItemLabel.oninput = () => this.handleSearch();
         this.selectedElem.appendChild(this.selectedItemLabel);
 
         const dropIcon = document.createElement('i');
@@ -108,6 +121,8 @@ export class Dropdown extends Component {
     }
 
     switch(expanded?: boolean) {
+        this.select(this.selected, false);
+
         if (expanded === undefined) {
             this.expanded = !this.expanded;
         } else {
@@ -116,16 +131,16 @@ export class Dropdown extends Component {
 
         if (this.expanded) {
             this.itemListElem.classList.remove('hidden');
-            this.selectedItemLabel.setAttribute('contenteditable', 'true');
             this.selectedItemLabel.focus();
         } else {
             this.itemListElem.classList.add('hidden');
-            this.selectedItemLabel.removeAttribute('contenteditable');
         }
     }
 
-    select(item: DropdownItem) {
+    select(item: DropdownItem, collapse=true) {
         this.selected = item;
+        this.search = null;
+        this.showAll();
         const labelElem = dom(this.selectedElem).classname(
             'dropdown-selected-item-label'
         )[0];
@@ -138,7 +153,14 @@ export class Dropdown extends Component {
         if (this.onSelect) {
             this.onSelect(this.selected);
         }
-        this.collapse();
+        if (collapse) {
+            this.collapse();
+        }
+    }
+
+    private showAll() {
+        const options = dom(this.itemListElem).classname('dropdown-item');
+        options.forEach((option) => option.classList.remove('hidden'));
     }
 
     private handleClick(elem: HTMLLIElement) {
@@ -148,27 +170,43 @@ export class Dropdown extends Component {
         this.select(selection);
     }
 
-    private handleSearch() {
-        if (this.expanded) {
-            const search = this.selectedItemLabel.textContent;
-            const options = dom(this.itemListElem).tagname<HTMLLIElement>('li');
-            options.forEach((option) => option.classList.remove('hidden'));
-            const matches = options.filter((option) => {
-                const label = option.dataset.label || option.dataset.value;
-                if (!label) return false;
-                return !label.toLowerCase().includes(search.toLowerCase());
-            });
-            matches.forEach((option) => option.classList.add('hidden'));
-            const noResults = dom(this.itemListElem).classname(
-                'dropdown-no-results'
-            )[0];
-            if (matches.length > 0) {
-                noResults.classList.remove('hidden');
+    private handleSearchInput(event: KeyboardEvent) {
+        const noResults = dom(this.itemListElem).classname(
+            'dropdown-no-results'
+        )[0];
+        noResults.classList.add('hidden');
+
+        if (!this.expanded) return;
+
+        if (event.key == 'Backspace') {
+            if (this.search.length > 1) {
+                this.search = this.search.slice(0, this.search.length - 1);
             } else {
-                noResults.classList.add('hidden');
+                this.search = null;
             }
         } else {
+            this.search = (this.search || '') + event.key;
+        }
+
+        if (this.search == null) {
+            this.select(this.selected, false);
             return;
+        }
+
+        this.selectedItemLabel.textContent = this.search;
+        this.showAll();
+        dom(this.selectedElem).tagname<HTMLImageElement>('img')[0].src = '';
+
+        const options = dom(this.itemListElem).classname('dropdown-item');
+        const matched = options.filter((option) => {
+            const label = option.dataset.label || option.dataset.value;
+            if (!label) return false;
+            return label.toLowerCase().includes(this.search.toLowerCase());
+        });
+        const discarded = options.filter((item) => !matched.includes(item));
+        discarded.forEach((option) => option.classList.add('hidden'));
+        if (matched.length == 0) {
+            noResults.classList.remove('hidden');
         }
     }
 }
