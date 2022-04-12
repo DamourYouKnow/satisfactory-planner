@@ -43,8 +43,8 @@ export class FactoryRecipe<TBuilding extends Building, TItem extends Item> {
                 item: input.item,
                 quantity: input.quantity,
                 ratePerMinute: FactoryRecipe.ratePerMinute(
-                    recipe.timeSeconds,
-                    input.quantity
+                    input.quantity,
+                    recipe.timeSeconds
                 )
             };
         });
@@ -53,8 +53,8 @@ export class FactoryRecipe<TBuilding extends Building, TItem extends Item> {
                 item: output.item,
                 quantity: output.quantity,
                 ratePerMinute: FactoryRecipe.ratePerMinute(
-                    recipe.timeSeconds,
-                    output.quantity
+                    output.quantity,
+                    recipe.timeSeconds
                 )
             };
         });
