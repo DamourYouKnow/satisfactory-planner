@@ -6,6 +6,7 @@ type StringMap = {[key: string]: string}
 
 interface CreateElementOptions {
     id?: string,
+    attributes?: StringMap,
     classList?: string[],
     textContent?: string
     dataset?: StringMap
@@ -21,6 +22,11 @@ class DOM {
         ) => void
     } = {
         'id': (elem, value: string) => elem.setAttribute('id', value),
+        'attributes': (elem, value: StringMap) => {
+            for (const name in value) {
+                elem.setAttribute(name, value[name]);
+            }
+        },
         'classList': (elem, value: string[]) => elem.classList.add(...value),
         'textContent': (elem, value: string) => elem.textContent = value,
         'dataset': (elem, value: StringMap) => {

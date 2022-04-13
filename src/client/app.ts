@@ -101,9 +101,11 @@ class App {
         );
         const building = new FactoryBuilding(factoryRecipe);
         
-        const section = new FactorySection();
+        if (this.factory.sections.length == 0) {
+            this.factory.sections.push(new FactorySection());
+        }
         const group = new FactoryBuildingGroup(building, 1);
-        section.groups.push(group);
+        this.factory.sections[0].groups.push(group);
 
         const groupDiv = dom().create('div', {
             classList: ['building-group']
@@ -130,9 +132,16 @@ function buildingGroupInfo(
         textContent: group.building.building
     });
 
-    dom(infoDiv).create('div', {
-        textContent: `x ${group.count}`
+    const buildingCountDiv = dom(infoDiv).create('div', {
+        textContent: `x`
     });
+    const buildingCountInput = dom(buildingCountDiv).create('input', {
+        attributes: {
+            'type': 'text'
+        },
+        classList: ['building-count-input']
+    });
+    buildingCountInput.value = '1';
 
     return infoDiv;
 }

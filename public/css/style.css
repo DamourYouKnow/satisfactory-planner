@@ -101,6 +101,14 @@ body {
 .building-group-info img {
     height: 5em;
 }
+.building-count-input {
+    width: 2em;
+    background-color: #5F668C;
+    border-color: #FA9549;
+    color: white;
+    margin-left: 0.8em;
+    text-align: center;
+}
 .item-flow-table {
     display: inline-block;
     width: 25em;
