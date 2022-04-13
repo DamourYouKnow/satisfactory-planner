@@ -49,24 +49,23 @@ export class Dropdown extends Component {
         this.element.innerHTML = '';
         this.element.classList.add('dropdown');
 
-        this.selectedElem = document.createElement('div');
-        this.selectedElem.classList.add('dropdown-selected-item');
+        this.selectedElem = dom(this.element).create('div', {
+            classList: ['dropdown-selected-item']
+        });
         this.selectedElem.onclick = () => {
             this.switch();
         };
-        this.element.appendChild(this.selectedElem);
 
-        const selectedItemImage = document.createElement('img');
+        const selectedItemImage = dom(this.selectedElem).create('img');
         selectedItemImage.alt = '';
-        this.selectedElem.appendChild(selectedItemImage);
 
-        this.selectedItemLabel = document.createElement('span');
-        this.selectedItemLabel.classList.add('dropdown-selected-item-label');
-        this.selectedElem.appendChild(this.selectedItemLabel);
+        this.selectedItemLabel = dom(this.selectedElem).create('span', {
+            classList: ['dropdown-selected-item-label']
+        });
 
-        const dropIcon = document.createElement('i');
-        dropIcon.classList.add('fa-solid', 'fa-angle-down', 'dropdown-arrow');
-        this.selectedElem.appendChild(dropIcon);
+        dom(this.selectedElem).create('i', {
+            classList: ['fa-solid', 'fa-angle-down', 'dropdown-arrow']
+        });
 
         this.itemListElem = document.createElement('ul');
         this.element.appendChild(this.itemListElem);
@@ -81,35 +80,35 @@ export class Dropdown extends Component {
         this.select(this.items[0]);
 
         for (const item of this.items) {
-            const itemElem = document.createElement('li');
-            itemElem.classList.add('dropdown-item');
-            itemElem.dataset.value = item.value;
-            itemElem.dataset.label = item.label;
-
-            const image = document.createElement('img');
-            if (item.image) {
-                image.src = item.image;
-            }
-            image.alt = '';
-            itemElem.appendChild(image);
-            
-            const labelDiv = document.createElement('div');
-            labelDiv.classList.add('dropdown-item-label');
-            labelDiv.textContent = item.label;
-            itemElem.appendChild(labelDiv);
+            const itemElem = dom().create('li', {
+                classList: ['dropdown-item'],
+                dataset: {
+                    value: item.label,
+                    label: item.label
+                }
+            });
             itemElem.onclick = () => {
                 this.handleClick(itemElem);
             };
 
+            const image = dom(itemElem).create('img');
+            if (item.image) {
+                image.src = item.image;
+            }
+            image.alt = '';
+            
+            dom(itemElem).create('div', {
+                classList: ['dropdown-item-label'],
+                textContent: item.label
+            });
+
             this.itemListElem.appendChild(itemElem);
         }
 
-        const noResultsItem = document.createElement('li');
-        noResultsItem.classList.add(
-            'dropdown-no-results', 'dropdown-item', 'hidden'
-        );
-        noResultsItem.textContent = 'No results...';
-        this.itemListElem.appendChild(noResultsItem);
+        dom(this.itemListElem).create('li', {
+            classList: ['dropdown-no-results', 'dropdown-item', 'hidden'],
+            textContent: 'No results...'
+        });
     }
 
     expand() {

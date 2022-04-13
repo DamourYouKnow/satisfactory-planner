@@ -1,13 +1,52 @@
+import { Domain } from "domain";
 
 export function dom(elem?: HTMLElement) {
     return new DOM(elem);
 }
 
+type StringMap = {[key: string]: string}
+
+interface CreateElementOptions {
+    id?: string,
+    classList?: string[],
+    textContent?: string
+    dataset?: StringMap
+}
+
 class DOM {
     private elem: HTMLElement;
 
+    static createOptions: {
+        [key in keyof CreateElementOptions]: (
+            elem: HTMLElement,
+            value: any
+        ) => void
+    } = {
+        'id': (elem, value: string) => elem.setAttribute('id', value),
+        'classList': (elem, value: string[]) => elem.classList.add(...value),
+        'textContent': (elem, value: string) => elem.textContent = value,
+        'dataset': (elem, value: StringMap) => {
+            for (const key in value) {
+                elem.dataset[key] = value[key];
+            }
+        },
+    };
+
     constructor(elem?: HTMLElement) {
         this.elem = elem || document.body;
+    }
+
+    public create<T extends keyof HTMLElementTagNameMap>(
+        tag: T, options?: CreateElementOptions
+    ): HTMLElementTagNameMap[T] {
+        const elem = document.createElement(tag);
+        if (options) {
+            for (const key in options) {
+                DOM.createOptions[key](elem, options[key]);
+            }
+        }       
+        if (this.elem) this.elem.appendChild(elem);
+        return elem;
     }
 
     public id<TElement extends HTMLElement>(id: string): TElement {
