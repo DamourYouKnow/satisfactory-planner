@@ -1,5 +1,3 @@
-import { Domain } from "domain";
-
 export function dom(elem?: HTMLElement) {
     return new DOM(elem);
 }
