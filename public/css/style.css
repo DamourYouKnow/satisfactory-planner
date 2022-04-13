@@ -21,6 +21,7 @@ body {
     position: absolute;
     background-color: inherit;
     border-top: solid 1px black;
+    z-index: 100;
 }
 
 .dropdown-item {
@@ -82,28 +83,43 @@ body {
 }
 
 .building-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: white;
     background-color: #5F668C;
     width: 100%;
-    max-width: 50em;
+    max-width: 60em;
+    border-top: 1px black solid;
+    border-bottom: 1px black solid;
 }
 .building-group-info {
+    width: 10em;
     display: inline-block;
+    padding-left: 3em;
 }
 .building-group-info img {
-    height: 4em;
+    height: 5em;
 }
 .item-flow-table {
     display: inline-block;
+    width: 25em;
 }
 .item-flow-table td {
     padding: 1em;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
 }
+.item-flow-label {
+    width: 15em;
+}
+.item-flow-rate {
+    width: 10em;
+    text-align: right;
+}
 .item-flow-quantity {
     align-content: right;
 }
 .item-flow-table img {
-    height: 3em;
+    height: 2.5em;
 }

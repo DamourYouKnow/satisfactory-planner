@@ -148,7 +148,9 @@ function flowTable(itemFlows: ItemFlow[]): HTMLTableElement {
         const image = dom(imageCell).create('img');
         image.src = `images/${itemFlow.item}.png`;
         
-        const itemCell = dom().create('td');
+        const itemCell = dom().create('td', {
+            classList: ['item-flow-label']
+        });
         dom(itemCell).create('div', {
             textContent: String(itemFlow.item)
         });
@@ -158,6 +160,7 @@ function flowTable(itemFlows: ItemFlow[]): HTMLTableElement {
         });
 
         const rateCell = dom().create('td', {
+            classList: ['item-flow-rate'],
             textContent: String(`${itemFlow.ratePerMinute} / min`) 
         });
 
