@@ -38,7 +38,8 @@ export class Dropdown extends Component {
         this.search = null;
         this.element.classList.add('dropdown');
 
-        document.addEventListener('keydown', (event) => {
+        this.element.setAttribute('tabindex', '-1');
+        this.element.addEventListener('keydown', (event) => {
             if (this.expanded && Dropdown.allowedCharacters.has(event.key)) {
                 this.handleSearchInput(event);
             }
@@ -70,7 +71,7 @@ export class Dropdown extends Component {
         this.itemListElem = document.createElement('ul');
         this.element.appendChild(this.itemListElem);
 
-        window.addEventListener('click', (event: MouseEvent) => { 
+        this.element.addEventListener('click', (event: MouseEvent) => { 
             const target = event.target as HTMLElement;
             if (!this.element.contains(target)) {
                 this.collapse();
