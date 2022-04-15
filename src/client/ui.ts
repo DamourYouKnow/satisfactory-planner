@@ -1,4 +1,5 @@
 import { dom } from './dom';
+import { FactoryBuildingGroup, ItemFlow } from './factory';
 
 abstract class Component {
     element: HTMLElement;
@@ -208,5 +209,95 @@ export class Dropdown extends Component {
         if (matched.length == 0) {
             noResults.classList.remove('hidden');
         }
+    }
+}
+
+export class BuildingGroupManager {
+    element: HTMLElement;
+    group: FactoryBuildingGroup;
+
+    static map = new Map<FactoryBuildingGroup, BuildingGroupManager>();
+
+    constructor(element: HTMLElement, group: FactoryBuildingGroup) {
+        this.element = element;
+        this.group = group;
+        if (!element.classList.contains('building-group')) {
+            element.classList.add('building-group');
+        }
+        this.element.appendChild(this.flowTable(group.building.recipe.inputs));
+        this.element.appendChild(this.buildingGroupInfo());
+        this.element.appendChild(this.flowTable(group.building.recipe.outputs));
+
+        BuildingGroupManager.map.set(group, this);
+    }
+
+    private flowTable(itemFlows: ItemFlow[]): HTMLTableElement {
+        const table = dom().create('table', {
+            classList: ['item-flow-table']
+        });
+        for (const itemFlow of itemFlows) {
+            const row = dom().create('tr');
+    
+            const imageCell = dom().create('td');
+            const image = dom(imageCell).create('img');
+            image.src = `images/${itemFlow.item}.png`;
+            
+            const itemCell = dom().create('td', {
+                classList: ['item-flow-label']
+            });
+            dom(itemCell).create('div', {
+                textContent: String(itemFlow.item)
+            });
+            dom(itemCell).create('div', {
+                classList: ['item-flow-quantity'],
+                textContent: `x ${itemFlow.quantity}`
+            });
+    
+            const rateCell = dom().create('td', {
+                classList: ['item-flow-rate'],
+                textContent: String(`${itemFlow.ratePerMinute} / min`) 
+            });
+    
+            row.appendChild(imageCell);
+            row.appendChild(itemCell);
+            row.appendChild(rateCell);
+    
+            table.appendChild(row);
+        }
+    
+        return table;
+    }
+
+    private buildingGroupInfo(): HTMLDivElement {
+        const infoDiv = dom().create('div', {
+            classList: ['building-group-info']
+        });
+    
+        const image = dom(infoDiv).create('img');
+        image.src = `images/${this.group.building.building}.png`;
+    
+        dom(infoDiv).create('div', {
+            textContent: this.group.building.building
+        });
+    
+        const buildingCountDiv = dom(infoDiv).create('div', {
+            textContent: `x`
+        });
+        const buildingCountInput = dom(buildingCountDiv).create('input', {
+            attributes: {
+                'type': 'text'
+            },
+            classList: ['building-count-input']
+        });
+        buildingCountInput.value = '1';
+        buildingCountInput.onchange = (event: Event) => {
+            const targetElem = event.target as HTMLInputElement;
+            const groups = dom().classname('building-group');
+            const index = groups.findIndex((group) => {
+                return dom(group).isParentOf(targetElem);
+            });
+        };
+    
+        return infoDiv;
     }
 }

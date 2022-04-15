@@ -6,10 +6,9 @@ import {
     FactorySection,
     FactoryRecipe,
     FactoryBuilding,
-    FactoryBuildingGroup,
-    ItemFlow
+    FactoryBuildingGroup
 } from './factory';
-import { Dropdown, DropdownItem } from './ui';
+import { BuildingGroupManager, Dropdown, DropdownItem } from './ui';
 import { dom } from './dom';
 
 window.onload = function() {
@@ -107,78 +106,11 @@ class App {
         const group = new FactoryBuildingGroup(building, 1);
         this.factory.sections[0].groups.push(group);
 
-        const groupDiv = dom().create('div', {
-            classList: ['building-group']
-        });
-        groupDiv.appendChild(flowTable(group.building.recipe.inputs));
-        groupDiv.appendChild(buildingGroupInfo(group));
-        groupDiv.appendChild(flowTable(group.building.recipe.outputs));
+        const groupManager = new BuildingGroupManager(
+            dom().create('div'),
+            group
+        );
 
-        dom().id('report-view').appendChild(groupDiv);
+        dom().id('report-view').appendChild(groupManager.element);
     }
-}
-
-function buildingGroupInfo(
-    group: FactoryBuildingGroup
-): HTMLDivElement {
-    const infoDiv = dom().create('div', {
-        classList: ['building-group-info']
-    });
-
-    const image = dom(infoDiv).create('img');
-    image.src = `images/${group.building.building}.png`;
-
-    dom(infoDiv).create('div', {
-        textContent: group.building.building
-    });
-
-    const buildingCountDiv = dom(infoDiv).create('div', {
-        textContent: `x`
-    });
-    const buildingCountInput = dom(buildingCountDiv).create('input', {
-        attributes: {
-            'type': 'text'
-        },
-        classList: ['building-count-input']
-    });
-    buildingCountInput.value = '1';
-
-    return infoDiv;
-}
-
-function flowTable(itemFlows: ItemFlow[]): HTMLTableElement {
-    const table = dom().create('table', {
-        classList: ['item-flow-table']
-    });
-    for (const itemFlow of itemFlows) {
-        const row = dom().create('tr');
-
-        const imageCell = dom().create('td');
-        const image = dom(imageCell).create('img');
-        image.src = `images/${itemFlow.item}.png`;
-        
-        const itemCell = dom().create('td', {
-            classList: ['item-flow-label']
-        });
-        dom(itemCell).create('div', {
-            textContent: String(itemFlow.item)
-        });
-        dom(itemCell).create('div', {
-            classList: ['item-flow-quantity'],
-            textContent: `x ${itemFlow.quantity}`
-        });
-
-        const rateCell = dom().create('td', {
-            classList: ['item-flow-rate'],
-            textContent: String(`${itemFlow.ratePerMinute} / min`) 
-        });
-
-        row.appendChild(imageCell);
-        row.appendChild(itemCell);
-        row.appendChild(rateCell);
-
-        table.appendChild(row);
-    }
-
-    return table;
 }
