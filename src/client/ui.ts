@@ -340,7 +340,7 @@ export class BuildingGroupManager {
             },
             classList: ['building-count-input']
         });
-        buildingCountInput.value = '1';
+        buildingCountInput.value = this.group.count.toString();
         buildingCountInput.onchange = (event: Event) => {
             const targetElem = event.target as HTMLInputElement;
             this.group.count = Number(targetElem.value);
