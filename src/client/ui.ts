@@ -45,6 +45,29 @@ export class Dropdown extends Component {
                 this.handleSearchInput(event);
             }
         });
+
+        const outsideClickHandler = (event: MouseEvent) => { 
+            const target = event.target as HTMLElement;
+            if (!this.element.contains(target)) {
+                this.collapse();
+            }
+        };
+        window.addEventListener('click', outsideClickHandler);
+
+        const observer = new MutationObserver((mutationsList) => {
+            const mutation = mutationsList.find((mutation) => {
+                if (mutation.type != 'childList') return false;
+                const nodes = Array.from(mutation.removedNodes);
+                return nodes.some((node) => node == this.element);
+            });
+            if (mutation) {
+                window.removeEventListener('click', outsideClickHandler);
+            }
+        });
+
+        observer.observe(document.body, { 
+            childList: true 
+        });
     }
 
     update() {
@@ -71,13 +94,6 @@ export class Dropdown extends Component {
 
         this.itemListElem = document.createElement('ul');
         this.element.appendChild(this.itemListElem);
-
-        this.element.addEventListener('click', (event: MouseEvent) => { 
-            const target = event.target as HTMLElement;
-            if (!this.element.contains(target)) {
-                this.collapse();
-            }
-        });
 
         this.select(this.items[0]);
 
