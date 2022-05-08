@@ -29,7 +29,7 @@ export enum Item {
     CopperOre = "Copper Ore",
     CopperPowder = "Copper Powder",
     CopperSheet = "Copper Sheet",
-    CrudeOil = "CrudeOil",
+    CrudeOil = "Crude Oil",
     CrystalOscillator = "Crystal Oscillator",
     ElectromagneticControlRod = "Electromagnetic Control Rod",
     EmptyCanister = "Empty Canister",
