@@ -113,18 +113,20 @@ body {
 }
 .building-group-info {
     width: 10em;
-    display: inline-block;
+    display: flex;
     padding-left: 3em;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 .building-group-info img {
     height: 5em;
 }
 .building-count-input {
     width: 2em;
-    background-color: #5F668C;
+    background-color: #4e5373;
     border-color: #FA9549;
     color: white;
-    margin-left: 0.8em;
     text-align: center;
 }
 .item-flow-table {
@@ -148,4 +150,27 @@ body {
 }
 .item-flow-table img {
     height: 2.5em;
+}
+#main-view {
+    display: flex;
+    flex-direction: row;
+}
+#production-overview-view {
+
+}
+#production-overview-view table {
+    
+}
+#production-overview-view td {
+    padding-top: 0.15em;
+    padding-bottom: 0.15em;
+    padding-left: 0.5em;
+    padding-right: 0.55em;
+}
+#production-overview-view img {
+    height: 100%;
+    width: 32px;
+}
+.table-number {
+    text-align: right;
 }

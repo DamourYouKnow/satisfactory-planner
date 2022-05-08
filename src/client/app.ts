@@ -10,7 +10,7 @@ import {
     FactoryBuilding,
     FactoryBuildingGroup
 } from './factory';
-import { BuildingGroupManager, Dropdown, DropdownItem } from './ui';
+import { BuildingGroupManager, Dropdown, DropdownItem, ProductionTable } from './ui';
 import { dom } from './dom';
 import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
 
@@ -134,6 +134,7 @@ class App {
                 );
                 groupManager.onchange = () => {
                     this.save();
+                    this.update();
                 };
                 groupManager.ondelete = (index) => {
                     this.factory.sections[0].groups.splice(index, 1);
@@ -156,6 +157,11 @@ class App {
                     this.save();
                 }
             });
+
+            new ProductionTable(
+                dom().id('production-overview-view'),
+                this.factory.sections[0]
+            );
         }
 
         this.save();

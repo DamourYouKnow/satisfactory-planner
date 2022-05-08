@@ -1,5 +1,6 @@
+import { Item } from './data/items';
 import { dom } from './dom';
-import { FactoryBuildingGroup, ItemFlow } from './factory';
+import { FactoryBuildingGroup, FactorySection, ItemFlow } from './factory';
 
 abstract class Component {
     element: HTMLElement;
@@ -331,9 +332,7 @@ export class BuildingGroupManager {
             textContent: this.group.building.building
         });
     
-        const buildingCountDiv = dom(infoDiv).create('div', {
-            textContent: `x`
-        });
+        const buildingCountDiv = dom(infoDiv).create('div');
         const buildingCountInput = dom(buildingCountDiv).create('input', {
             attributes: {
                 'type': 'text'
@@ -348,5 +347,89 @@ export class BuildingGroupManager {
         };
     
         return infoDiv;
+    }
+}
+
+export class ProductionTable {
+    element: HTMLElement;
+
+    constructor(element: HTMLElement, section: FactorySection) {
+        element.innerHTML = '';
+        this.element = element;
+
+        const inputs = new Map<Item, number>();
+        const outputs = new Map<Item, number>();
+        for (const group of section.groups) {
+            for (const input of group.inputs) {
+                if (!inputs.has(input.item)) inputs.set(input.item, 0);
+                inputs.set(
+                    input.item, 
+                    inputs.get(input.item) + input.ratePerMinute
+                );
+            }
+            for (const output of group.outputs) {
+                if (!outputs.has(output.item)) outputs.set(output.item, 0);
+                outputs.set(
+                    output.item, 
+                    outputs.get(output.item) + output.ratePerMinute
+                );
+            }
+        }
+
+        const items = Array.from(new Set<Item>([
+            ...Array.from(inputs.keys()),
+            ...Array.from(outputs.keys())
+        ]));
+        items.sort((a, b) => a.toString().localeCompare(b.toString()));
+
+        const table = dom(this.element).create('table');
+        const tableHead = dom(table).create('thead');
+        dom(tableHead).create('td', {
+            textContent: ''
+        });
+        dom(tableHead).create('td', {
+            textContent: 'Item'
+        });
+        dom(tableHead).create('td', {
+            classList: ['table-number'],
+            textContent: 'Demand'
+        });
+        dom(tableHead).create('td', {
+            classList: ['table-number'],
+            textContent: 'Production'
+        });
+        dom(tableHead).create('td', {
+            classList: ['table-number'],
+            textContent: 'Rate'
+        });
+        const tableBody = dom(table).create('tbody');
+
+        for (const item of items) {
+            const demand = inputs.get(item) || 0;
+            const production = outputs.get(item) || 0;
+
+            const row = dom(tableBody).create('tr');
+            const imageCell = dom(row).create('td');
+            dom(imageCell).create('img', {
+                attributes: {
+                    src: `images/${item}.png`,
+                }
+            });
+            dom(row).create('td', {
+                textContent: item
+            });
+            dom(row).create('td', {
+                classList: ['table-number'],
+                textContent: demand > 0 ? demand.toString() : ''
+            });
+            dom(row).create('td', {
+                classList: ['table-number'],
+                textContent: production > 0 ? production.toString() : ''
+            });
+            dom(row).create('td', {
+                classList: ['table-number'],
+                textContent: (production - demand).toString()
+            });
+        }
     }
 }
