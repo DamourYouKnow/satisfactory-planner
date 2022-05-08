@@ -27,9 +27,12 @@ class FactoryJSONSerializer extends JSONSerializer<Factory, FactoryJSON> {
                 const recipe = recipes.find((recipe) => {
                     return recipe.name == group.recipe;
                 });
+                const buildingKey = Object.keys(Building).find((key) => {
+                    return Building[key] == group.building;
+                });
                 return new FactoryBuildingGroup(
                     new FactoryBuilding(new FactoryRecipe(
-                        Building[group.building],
+                        Building[buildingKey],
                         recipe.item,
                         recipe
                     )),
