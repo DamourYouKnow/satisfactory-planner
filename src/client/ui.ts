@@ -248,10 +248,6 @@ export class BuildingGroupManager {
             dom(itemCell).create('div', {
                 textContent: String(itemFlow.item)
             });
-            dom(itemCell).create('div', {
-                classList: ['item-flow-quantity'],
-                textContent: `x ${itemFlow.quantity}`
-            });
     
             const rateCell = dom().create('td', {
                 classList: ['item-flow-rate'],
