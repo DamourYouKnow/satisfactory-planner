@@ -25,7 +25,8 @@ export default function() {
                 target: 'es2017',
                 sourceMap: !prod,
                 inlineSourceMap: !prod,
-                inlineSources: !prod
+                inlineSources: !prod,
+                allowSyntheticDefaultImports: true
             }),
             babel({
                 exclude: ['*.html', '**/node_modules/**'],

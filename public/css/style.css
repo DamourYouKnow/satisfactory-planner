@@ -93,6 +93,9 @@ body {
     border-top: 1px black solid;
     border-bottom: 1px black solid;
 }
+.building-group:hover {
+    cursor: grab
+}
 .building-group-info {
     width: 10em;
     display: inline-block;

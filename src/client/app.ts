@@ -1,3 +1,5 @@
+import Sortable from "sortablejs"; 
+
 import { Building } from './data/buildings';
 import { Item } from './data/items';
 import { recipes } from './data/recipes';
@@ -130,6 +132,20 @@ class App {
                 );
                 sectionView.appendChild(groupManager.element);
             }
+
+            // TODO: Apply to each factory section
+            Sortable.create(sectionView, {
+                group: 'building-group',
+                preventOnFilter: false,
+                filter: '.building-count-input',
+                onSort: (event) => {
+                    const groups = this.factory.sections[0].groups;
+                    const newTemp = groups[event.newIndex];
+                    groups[event.newIndex] = groups[event.oldIndex];
+                    groups[event.oldIndex] = newTemp;
+                    this.save();
+                }
+            });
         }
 
         this.save();
