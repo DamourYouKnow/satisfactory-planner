@@ -139,6 +139,26 @@ export class FactoryBuildingGroup {
     building: FactoryBuilding<Building, Item>;
     count: number;
 
+    get inputs(): ItemFlow[] {
+        return this.building.recipe.inputs.map((input) => {
+            return {
+                item: input.item,
+                quantity: input.quantity * this.count,
+                ratePerMinute: input.ratePerMinute * this.count 
+            };
+        });
+    }
+
+    get outputs(): ItemFlow[] {
+        return this.building.recipe.outputs.map((output) => {
+            return {
+                item: output.item,
+                quantity: output.quantity * this.count,
+                ratePerMinute: output.ratePerMinute * this.count 
+            };
+        });
+    }
+
     constructor (building: FactoryBuilding<Building, Item>, count: number) {
         this.building = building;
         this.count = count;

@@ -9,7 +9,7 @@ body {
 .dropdown {
     width: 20em;
     display: inline-block;
-    background-color: #5F668C;
+    background-color: #3A3C3D
 }
 
 .dropdown > ul {
@@ -56,7 +56,7 @@ body {
     padding-bottom: 0.5em;
     padding-left: 0.5em;
     padding-right: 1em;
-    background-color: #5F668C;
+    background-color: #313131;
     height: 2em;
 }
 .dropdown-selected-item:hover {
@@ -81,17 +81,32 @@ body {
     float: right;
     padding-top: 0.5em;
 }
-
 .building-group {
     display: flex;
-    align-items: center;
-    justify-content: center;
     color: white;
     background-color: #5F668C;
-    width: 100%;
     max-width: 60em;
     border-top: 1px black solid;
     border-bottom: 1px black solid;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+.building-group-delete {
+    display: flex;
+    background-color: #ca665b;
+    align-self: stretch;
+    align-content: stretch;
+    align-items: stretch;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+.building-group-delete:hover {
+    cursor: pointer
+}
+.trash-icon {
+    align-self: center;
 }
 .building-group:hover {
     cursor: grab

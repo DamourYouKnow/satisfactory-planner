@@ -73,6 +73,20 @@ class DOM {
             this.elem.getElementsByClassName(classname)
         ) as TElement[];
     }
+
+    public classnameParents<TElement extends HTMLElement>(
+        classname: string
+    ): TElement[] {
+        const results: TElement[] = []; 
+        let currElem = this.elem;
+        while (currElem) {
+            if (currElem.classList.contains(classname)) {
+                results.push(currElem as TElement);
+            }
+            currElem = currElem.parentElement;
+        }
+        return results;
+    }
     
     public tagname<TElement extends HTMLElement>(
         tagname: string

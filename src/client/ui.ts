@@ -230,7 +230,10 @@ export class Dropdown extends Component {
 
 export class BuildingGroupManager {
     element: HTMLElement;
+    table: HTMLElement;
     group: FactoryBuildingGroup;
+    onchange: () => void;
+    ondelete: (index: number) => void;
 
     static map = new Map<FactoryBuildingGroup, BuildingGroupManager>();
 
@@ -240,11 +243,47 @@ export class BuildingGroupManager {
         if (!element.classList.contains('building-group')) {
             element.classList.add('building-group');
         }
-        this.element.appendChild(this.flowTable(group.building.recipe.inputs));
+
+        this.element.appendChild(this.flowTable(this.group.inputs));
         this.element.appendChild(this.buildingGroupInfo());
-        this.element.appendChild(this.flowTable(group.building.recipe.outputs));
+        this.element.appendChild(this.flowTable(this.group.outputs));
+
+        const deleteStub = dom(this.element).create('div', {
+            classList: ['building-group-delete']
+        });
+        const trashIcon = dom(deleteStub).create('i', {
+            classList: ['trash-icon', 'fa-solid', 'fa-trash-can']
+        });
+        deleteStub.onclick = () => {
+            if (this.ondelete) {
+                const parent = dom(this.element).classnameParents(
+                    'factory-section'
+                )[0];
+                const index = dom(parent).classname(
+                    'building-group'
+                ).findIndex((elem) => elem == this.element);
+                this.element.remove();
+                this.ondelete(index);
+            }
+        };
 
         BuildingGroupManager.map.set(group, this);
+    }
+
+    update() {
+        const tables = dom(this.element).classname('item-flow-table');
+        this.element.replaceChild(
+            this.flowTable(this.group.inputs),
+            tables[0]
+        );
+        this.element.replaceChild(
+            this.flowTable(this.group.outputs),
+            tables[1]
+        );
+
+        if (this.onchange) {
+            this.onchange();
+        }
     }
 
     private flowTable(itemFlows: ItemFlow[]): HTMLTableElement {
@@ -304,10 +343,8 @@ export class BuildingGroupManager {
         buildingCountInput.value = '1';
         buildingCountInput.onchange = (event: Event) => {
             const targetElem = event.target as HTMLInputElement;
-            const groups = dom().classname('building-group');
-            const index = groups.findIndex((group) => {
-                return dom(group).isParentOf(targetElem);
-            });
+            this.group.count = Number(targetElem.value);
+            this.update();
         };
     
         return infoDiv;

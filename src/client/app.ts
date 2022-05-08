@@ -12,6 +12,7 @@ import {
 } from './factory';
 import { BuildingGroupManager, Dropdown, DropdownItem } from './ui';
 import { dom } from './dom';
+import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
 
 window.onload = function() {
     new App();
@@ -119,6 +120,7 @@ class App {
 
     private update() {
         const sectionView = dom().id('factory-section-view');
+        sectionView.classList.add('factory-section');
         // TODO: Do not redraw everything each update.
         sectionView.innerHTML = '';
 
@@ -130,6 +132,14 @@ class App {
                     dom().create('div'),
                     group
                 );
+                groupManager.onchange = () => {
+                    this.save();
+                };
+                groupManager.ondelete = (index) => {
+                    this.factory.sections[0].groups.splice(index, 1);
+                    this.save();
+                    this.update();
+                };
                 sectionView.appendChild(groupManager.element);
             }
 
