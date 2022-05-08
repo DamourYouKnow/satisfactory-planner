@@ -1,4 +1,4 @@
-import { Item } from "./items";
+import { Item } from './items';
 import { Building } from './buildings';
 
 export interface Recipe {

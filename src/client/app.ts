@@ -17,11 +17,18 @@ window.onload = function() {
 
 class App {
     factory: Factory;
+    buildingGroupManager: BuildingGroupManager;
     buildingDropdown: Dropdown;
     recipeDropdown: Dropdown;
 
     constructor() {
         this.factory = new Factory();
+        this.load();
+
+        const clearDataBtn = dom().id<HTMLButtonElement>('clear-data-btn');
+        clearDataBtn.onclick = () => {
+            this.clearData();
+        };
 
         this.buildingDropdown = new Dropdown(dom().id('building-select'));
 
@@ -86,7 +93,7 @@ class App {
     }
 
     private handleRecipeSelect(item: DropdownItem) {
-        return null;
+        return;
     }
 
     private addBuilding() {
@@ -105,12 +112,52 @@ class App {
         }
         const group = new FactoryBuildingGroup(building, 1);
         this.factory.sections[0].groups.push(group);
+        this.update();
+    }
 
-        const groupManager = new BuildingGroupManager(
-            dom().create('div'),
-            group
-        );
+    private update() {
+        const sectionView = dom().id('factory-section-view');
+        // TODO: Do not redraw everything each update.
+        sectionView.innerHTML = '';
 
-        dom().id('report-view').appendChild(groupManager.element);
+        // TODO support multiple sections
+        if (this.factory.sections.length > 0) {
+            for (const group of this.factory.sections[0].groups) {
+                // TODO: Move to App, create managers for loaded content 
+                const groupManager = new BuildingGroupManager(
+                    dom().create('div'),
+                    group
+                );
+                sectionView.appendChild(groupManager.element);
+            }
+        }
+
+        this.save();
+    }
+
+    private save() {
+        const factoriesJSON = localStorage.getItem('factories');
+        const factories = factoriesJSON ?  JSON.parse(factoriesJSON): {};
+        factories[this.factory.name] = Factory.serializer.toJSON(this.factory);
+        localStorage.setItem('factories', JSON.stringify(factories));
+    }
+
+    private load() {
+        // TODO: Support multiple saves.
+        const factoriesJSON = localStorage.getItem('factories');
+        if (factoriesJSON) {
+            const factories = JSON.parse(factoriesJSON);
+            if (Object.keys(factories).length > 0) {
+                const factory = factories[Object.keys(factories)[0]];
+                this.factory = Factory.serializer.fromJSON(factory);
+            }
+        }
+        this.update();
+    }
+
+    private clearData() {
+        localStorage.removeItem('factories');
+        this.factory = new Factory();
+        this.update();
     }
 }

@@ -1,13 +1,71 @@
 import { Building } from './data/buildings';
-import { Recipe } from './data/recipes';
+import { Recipe, recipes } from './data/recipes';
 import { Item } from './data/items';
+
+interface FactoryJSON {
+    name: string,
+    sections: {
+        groups: {
+            building: string,
+            recipe: string,
+            count: number
+        }[]
+    }[]
+}
+
+abstract class JSONSerializer<T, TJSON> {
+    abstract fromJSON(json: TJSON): T
+    abstract toJSON(value: T): TJSON;
+}
+
+class FactoryJSONSerializer extends JSONSerializer<Factory, FactoryJSON> {
+    fromJSON(json: FactoryJSON) {
+        const factory = new Factory(json.name);
+        factory.sections = json.sections.map((section) => {
+            const newSection = new FactorySection();
+            newSection.groups = section.groups.map((group) => {
+                const recipe = recipes.find((recipe) => {
+                    return recipe.name == group.recipe;
+                });
+                return new FactoryBuildingGroup(
+                    new FactoryBuilding(new FactoryRecipe(
+                        Building[group.building],
+                        recipe.item,
+                        recipe
+                    )),
+                    group.count
+                );
+            });
+            return newSection;
+        });
+        return factory;
+    }
+    
+    toJSON(value): FactoryJSON {
+        return {
+            name: value.name,
+            sections: value.sections.map((section) => {
+                return {
+                    groups: section.groups.map((group) => {
+                        return  {
+                            building: group.building.building.toString(),
+                            recipe: group.building.recipe.name,
+                            count: group.count
+                        };
+                    })
+                };
+            })
+        };
+    }
+}
 
 export class Factory {
     name: string;
     sections: FactorySection[];
+    static serializer = new FactoryJSONSerializer();
 
-    constructor() {
-        this.name = 'My Factory';
+    constructor(name?: string) {
+        this.name = name || 'My Factory';
         this.sections = [];
     }
 }
@@ -26,7 +84,7 @@ export interface ItemFlow {
     ratePerMinute: number
 }
 
-export class FactoryRecipe<TBuilding extends Building, TItem extends Item> {
+export class FactoryRecipe<TBuilding extends Building, TItem extends Item>  {
     item: TItem;
     name: string;
     building: TBuilding;
