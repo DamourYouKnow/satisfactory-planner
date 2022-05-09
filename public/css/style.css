@@ -40,14 +40,14 @@ main {
 }
 
 #factory-section-view {
-    height: 80vh;
+    height: 75vh;
     overflow-y: scroll;
     margin-right: 1em;
     flex-basis: 50%;
 }
 
 #production-overview-view {
-    height: 80vh;
+    height: 75vh;
     margin-left: 1em;
     flex-basis: 50%;
     overflow-y: scroll;
@@ -148,9 +148,12 @@ main {
 .building-group:nth-child(2n) {
     background-color: #ebebeb;
 }
+.building-group:nth-child(2n) > .building-group-delete {
+    background-color: #c97a71;
+}
 .building-group-delete {
     display: flex;
-    background-color: #ca665b;
+    background-color: #e18a80;
     align-self: stretch;
     align-content: stretch;
     align-items: stretch;
@@ -203,19 +206,20 @@ main {
     align-content: right;
 }
 .item-flow-table img {
-    height: 2.5em;
+    height: 40px;
 }
 
 .production-table {
    display: flex;
    flex-direction: column;
    border-collapse: collapse;
+   width: 100%;
 }
 .production-table tr {
     display: table-row;
 }
 .production-table tr:nth-child(2n) {
-    background-color: #ebebeb;;
+    background-color: #ebebeb;
 }
 .production-table thead {
 
