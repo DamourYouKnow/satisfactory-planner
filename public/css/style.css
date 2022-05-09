@@ -58,7 +58,6 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex-basis: 20%;
     background-color: #7F7F7F;
     margin-right: 1em;
     padding: 0.5em;
@@ -81,14 +80,14 @@ main {
     height: 78vh;
     overflow-y: scroll;
     margin-right: 1em;
-    flex-basis: 40%;
+    flex-basis: 50%;
 }
 
 #production-overview-view {
     height: 78vh;
     margin-left: 1em;
-    flex-basis: 40%;
     overflow-y: scroll;
+    flex-basis: 40%;
 }
 
 button {
@@ -112,14 +111,17 @@ button:hover {
 }
 
 .dropdown {
-    width: 20em;
+    min-width: 20em;
+    width: 100%;
     display: inline-block;
     background-color: #3A3C3D;
+    position: relative;
 }
 
 .dropdown > ul {
-    width: inherit;
+    width: 100%;
     max-height: 20em;
+    overflow-x: hidden;
     overflow-y: scroll;
     padding: 0;
     margin: 0;
