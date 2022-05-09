@@ -141,6 +141,11 @@ export class Dropdown extends Component {
     switch(expanded?: boolean) {
         this.select(this.selected, false);
 
+        const noResults = dom(this.itemListElem).classname(
+            'dropdown-no-results'
+        )[0];
+        if (noResults) noResults.classList.add('hidden');
+
         if (expanded === undefined) {
             this.expanded = !this.expanded;
         } else {
