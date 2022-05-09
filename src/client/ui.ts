@@ -382,7 +382,9 @@ export class ProductionTable {
         ]));
         items.sort((a, b) => a.toString().localeCompare(b.toString()));
 
-        const table = dom(this.element).create('table');
+        const table = dom(this.element).create('table', {
+            classList: ['production-table']
+        });
         const tableHead = dom(table).create('thead');
         dom(tableHead).create('td', {
             textContent: ''

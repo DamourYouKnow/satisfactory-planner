@@ -1,9 +1,64 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #626263;
+    margin: 0;
+}
+
+h1 {
+    font-size: 2.5em;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    margin: 0;
+    padding: 0;
+    margin-left: 1em;
+}
+
+header {
+    color: #E59445;
+    background-color: #313131;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+}
+
+main {
+    margin-left: 2em;
+    margin-right: 2em;
 }
 
 .hidden {
     display: none;
+}
+
+#main-view {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+#factory-section-view {
+    height: 80vh;
+    overflow-y: scroll;
+    margin-right: 1em;
+    flex-basis: 50%;
+}
+
+#production-overview-view {
+    height: 80vh;
+    margin-left: 1em;
+    flex-basis: 50%;
+    overflow-y: scroll;
+}
+
+.screen {
+    background-color: white;
+    color: black;
+    font-size: 1.05em;
+    border: 10px #333333 solid;
+    border-radius: 10px;
 }
 
 .dropdown {
@@ -82,16 +137,16 @@ body {
     padding-top: 0.5em;
 }
 .building-group {
+    width: 100%;
     display: flex;
-    color: white;
-    background-color: #5F668C;
-    max-width: 60em;
-    border-top: 1px black solid;
-    border-bottom: 1px black solid;
+    outline: 1px #333333 solid;
     align-items: center;
     justify-content: center;
     flex-wrap: nowrap;
     flex-direction: row;
+}
+.building-group:nth-child(2n) {
+    background-color: #ebebeb;
 }
 .building-group-delete {
     display: flex;
@@ -107,6 +162,7 @@ body {
 }
 .trash-icon {
     align-self: center;
+    color: rgb(86, 2, 2);
 }
 .building-group:hover {
     cursor: grab
@@ -114,19 +170,17 @@ body {
 .building-group-info {
     width: 10em;
     display: flex;
-    padding-left: 3em;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
 }
 .building-group-info img {
-    height: 5em;
+    height: 64px;
 }
 .building-count-input {
     width: 2em;
-    background-color: #4e5373;
-    border-color: #FA9549;
-    color: white;
     text-align: center;
 }
 .item-flow-table {
@@ -151,25 +205,49 @@ body {
 .item-flow-table img {
     height: 2.5em;
 }
-#main-view {
-    display: flex;
-    flex-direction: row;
+
+.production-table {
+   display: flex;
+   flex-direction: column;
+   border-collapse: collapse;
 }
-#production-overview-view {
+.production-table tr {
+    display: table-row;
+}
+.production-table tr:nth-child(2n) {
+    background-color: #ebebeb;;
+}
+.production-table thead {
 
 }
-#production-overview-view table {
-    
+.production-table tbody {
+ 
 }
-#production-overview-view td {
+.production-table td {
+    display: table-cell;
     padding-top: 0.15em;
     padding-bottom: 0.15em;
     padding-left: 0.5em;
     padding-right: 0.55em;
 }
-#production-overview-view img {
+.production-table img {
     height: 100%;
     width: 32px;
+}
+.production-table td:nth-child(1) {
+    width: 32px;
+}
+.production-table td:nth-child(2) {
+    width: 10em;
+}
+.production-table td:nth-child(3) {
+    width: 10em;
+}
+.production-table td:nth-child(4) {
+    width: 10em;
+}
+.production-table td:nth-child(5) {
+    width: 10em;
 }
 .table-number {
     text-align: right;
