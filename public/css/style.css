@@ -105,7 +105,7 @@ button:hover {
 .screen {
     background-color: white;
     color: black;
-    font-size: 1.05em;
+    font-size: 0.9em;
     border: 10px #333333 solid;
     border-radius: 10px;
 }
@@ -223,16 +223,21 @@ button:hover {
     cursor: grab
 }
 .building-group-info {
-    width: 10em;
+    width: 12em;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    background-color: #e6e6e6;
+    align-self: stretch;
+}
+.building-group:nth-child(2n) .building-group-info{
+    background-color: #cdcdcd;
 }
 .building-group-info img {
-    height: 64px;
+    height: 50px;
 }
 .building-count-input {
     width: 2em;
@@ -241,11 +246,13 @@ button:hover {
 .item-flow-table {
     display: inline-block;
     width: 25em;
+    padding-left: 0.5em;
+    padding-right: 1em;
 }
 .item-flow-table td {
-    padding: 1em;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
+    padding-left: 0.25em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
 }
 .item-flow-label {
     width: 15em;
@@ -258,7 +265,8 @@ button:hover {
     align-content: right;
 }
 .item-flow-table img {
-    height: 40px;
+    height: 36px;
+    padding-right: 0.5em;
 }
 
 .production-table {
