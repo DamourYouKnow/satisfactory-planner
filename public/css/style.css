@@ -39,18 +39,68 @@ main {
     justify-content: center;
 }
 
+#menu-area {
+    display: flex;
+    background-color: #7F7F7F;
+    margin-bottom: 1em;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    justify-content: right;
+}
+#clear-data-btn {
+    background-color: #670f00;
+}
+
+#add-recipe-area {
+    height: 78vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-basis: 20%;
+    background-color: #7F7F7F;
+    margin-right: 1em;
+    padding: 0.5em;
+}
+#recipe-preview {
+    height: 15em;
+    width: 80%;
+    padding: 0.5em;
+    text-align: center;
+    border-width: 5px;
+    margin-bottom: 1em;
+}
+.dropdown-container {
+    margin-bottom: 2em;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
 #factory-section-view {
-    height: 75vh;
+    height: 78vh;
     overflow-y: scroll;
     margin-right: 1em;
-    flex-basis: 50%;
+    flex-basis: 40%;
 }
 
 #production-overview-view {
-    height: 75vh;
+    height: 78vh;
     margin-left: 1em;
-    flex-basis: 50%;
+    flex-basis: 40%;
     overflow-y: scroll;
+}
+
+button {
+    background-color: #3A3C3D;
+    color: white;
+    padding: 0.5em;
+    border: solid black 1px;
+    border-radius: 0.7em;
+    font-size: 1.1em;
+}
+button:hover {
+    cursor: pointer;
 }
 
 .screen {
@@ -64,7 +114,7 @@ main {
 .dropdown {
     width: 20em;
     display: inline-block;
-    background-color: #3A3C3D
+    background-color: #3A3C3D;
 }
 
 .dropdown > ul {

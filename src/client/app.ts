@@ -10,9 +10,13 @@ import {
     FactoryBuilding,
     FactoryBuildingGroup
 } from './factory';
-import { BuildingGroupManager, Dropdown, DropdownItem, ProductionTable } from './ui';
+import { 
+    BuildingGroupManager,
+    Dropdown, 
+    DropdownItem,
+    ProductionTable 
+} from './ui';
 import { dom } from './dom';
-import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
 
 window.onload = function() {
     new App();
@@ -33,12 +37,11 @@ class App {
             this.clearData();
         };
 
-        this.buildingDropdown = new Dropdown(dom().id('building-select'));
+        this.buildingDropdown = null;
 
         this.recipeDropdown = new Dropdown(dom().id('recipe-select'));
         this.recipeDropdown.onSelect = this.handleRecipeSelect;
 
-        this.loadBuildingDropdown();
         this.loadRecipeDropdown();
 
         const addBuildingBtn = dom().id<HTMLButtonElement>('add-building-btn');
