@@ -355,37 +355,23 @@ export class BuildingGroupManager {
     }
 }
 
+interface ProductionTableRowData {
+    item: Item,
+    demand: number,
+    production: number
+}
+
 export class ProductionTable {
     element: HTMLElement;
+    section: FactorySection;
+    private rowMap: Map<Item, HTMLTableRowElement>;
+    private body: HTMLElement;
 
     constructor(element: HTMLElement, section: FactorySection) {
         element.innerHTML = '';
         this.element = element;
-
-        const inputs = new Map<Item, number>();
-        const outputs = new Map<Item, number>();
-        for (const group of section.groups) {
-            for (const input of group.inputs) {
-                if (!inputs.has(input.item)) inputs.set(input.item, 0);
-                inputs.set(
-                    input.item, 
-                    inputs.get(input.item) + input.ratePerMinute
-                );
-            }
-            for (const output of group.outputs) {
-                if (!outputs.has(output.item)) outputs.set(output.item, 0);
-                outputs.set(
-                    output.item, 
-                    outputs.get(output.item) + output.ratePerMinute
-                );
-            }
-        }
-
-        const items = Array.from(new Set<Item>([
-            ...Array.from(inputs.keys()),
-            ...Array.from(outputs.keys())
-        ]));
-        items.sort((a, b) => a.toString().localeCompare(b.toString()));
+        this.section = section;
+        this.rowMap = new Map<Item, HTMLTableRowElement>();
 
         const table = dom(this.element).create('table', {
             classList: ['production-table']
@@ -409,34 +395,90 @@ export class ProductionTable {
             classList: ['table-number'],
             textContent: 'Rate'
         });
-        const tableBody = dom(table).create('tbody');
+        this.body = dom(table).create('tbody');
+    }
 
-        for (const item of items) {
-            const demand = inputs.get(item) || 0;
-            const production = outputs.get(item) || 0;
+    update() {
+        const rows = this.rows();
+        const rowDataMap = new Map<Item, ProductionTableRowData>(
+            rows.map((row) => [row.item, row])
+        );
 
-            const row = dom(tableBody).create('tr');
-            const imageCell = dom(row).create('td');
-            dom(imageCell).create('img', {
-                attributes: {
-                    src: `images/${item}.png`,
-                }
-            });
-            dom(row).create('td', {
-                textContent: item
-            });
-            dom(row).create('td', {
-                classList: ['table-number'],
-                textContent: demand > 0 ? demand.toString() : ''
-            });
-            dom(row).create('td', {
-                classList: ['table-number'],
-                textContent: production > 0 ? production.toString() : ''
-            });
-            dom(row).create('td', {
-                classList: ['table-number'],
-                textContent: (production - demand).toString()
-            });
+        // Identify and delete removed items
+        const rowElems = dom(this.body).tagname('tr');
+        const removed = rowElems.filter((rowElem) => {
+            return !rowDataMap.has(rowElem.dataset['item'] as Item);
+        });
+        removed.forEach((row) => {
+            this.rowMap.delete(row.dataset['item'] as Item);
+            row.remove();
+        });
+
+        // Identify and insert new items
+        const newRows: ProductionTableRowData[] = [];
+
+        //
+    }
+
+    rows(): ProductionTableRowData[] {
+        const inputs = new Map<Item, number>();
+        const outputs = new Map<Item, number>();
+        for (const group of this.section.groups) {
+            for (const input of group.inputs) {
+                if (!inputs.has(input.item)) inputs.set(input.item, 0);
+                inputs.set(
+                    input.item, 
+                    inputs.get(input.item) + input.ratePerMinute
+                );
+            }
+            for (const output of group.outputs) {
+                if (!outputs.has(output.item)) outputs.set(output.item, 0);
+                outputs.set(
+                    output.item, 
+                    outputs.get(output.item) + output.ratePerMinute
+                );
+            }
         }
+
+        const items = Array.from(new Set<Item>([
+            ...Array.from(inputs.keys()),
+            ...Array.from(outputs.keys())
+        ]));
+        items.sort((a, b) => a.toString().localeCompare(b.toString()));
+        return items.map((item) => {
+            return {
+                item: item,
+                demand: inputs.get(item) || 0,
+                production: outputs.get(item) || 0
+            };
+        });
+    }
+
+    private createRow(rowData: ProductionTableRowData) {
+        const row = dom().create('tr');
+        const imageCell = dom(row).create('td');
+        dom(imageCell).create('img', {
+            attributes: {
+                src: `images/${rowData.item}.png`,
+            }
+        });
+        dom(row).create('td', {
+            textContent: rowData.item
+        });
+        const demand = rowData.demand;
+        dom(row).create('td', {
+            classList: ['table-number'],
+            textContent: demand > 0 ? demand.toString() : ''
+        });
+        const production = rowData.production;
+        dom(row).create('td', {
+            classList: ['table-number'],
+            textContent: production > 0 ? production.toString() : ''
+        });
+        dom(row).create('td', {
+            classList: ['table-number'],
+            textContent: (production - demand).toString()
+        });
+        return row;
     }
 }
