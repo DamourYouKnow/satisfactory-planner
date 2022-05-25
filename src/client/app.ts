@@ -46,6 +46,16 @@ class App {
 
         const addBuildingBtn = dom().id<HTMLButtonElement>('add-building-btn');
         addBuildingBtn.onclick = () => this.addBuilding();
+
+        const exportBtn = dom().id<HTMLButtonElement>('save-to-file');
+        exportBtn.onclick = () => {
+            this.export();
+        };
+
+        const importBtn = dom().id<HTMLButtonElement>('load-from-file');
+        importBtn.onclick = () => {
+            this.import();
+        };
     }
 
     private loadBuildingDropdown(item?: Item) {
@@ -188,6 +198,43 @@ class App {
             }
         }
         this.update();
+    }
+
+    private export() {   
+        const filename = `${this.factory.name || 'factory'}.json`;
+        const content = JSON.stringify(
+            Factory.serializer.toJSON(this.factory),
+            null,
+            2
+        );
+        const file = new Blob([content], { type: 'application/json'});
+        const link = dom(document.body).create('a');
+        link.download = filename;
+        link.href = URL.createObjectURL(file);
+        link.click();
+        link.remove();
+    }
+
+    private import() {
+        const input = dom(document.body).create('input', {
+            attributes: {
+                type: 'file',
+                style: 'display: none;'
+            }
+        });
+        input.onchange = () => {
+            const reader = new FileReader();
+            reader.onload = () => {
+                const content = reader.result;
+                this.factory = Factory.serializer.fromJSON(
+                    JSON.parse(content.toString())
+                );
+                input.remove();
+                this.update();
+            };
+            reader.readAsText(input.files[0]);
+        };
+        input.click();
     }
 
     private clearData() {
