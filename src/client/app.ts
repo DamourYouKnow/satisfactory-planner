@@ -46,6 +46,11 @@ class App {
 
         const addBuildingBtn = dom().id<HTMLButtonElement>('add-building-btn');
         addBuildingBtn.onclick = () => this.addBuilding();
+
+        const exportBtn = dom().id<HTMLButtonElement>('save-to-file');
+        exportBtn.onclick = () => {
+            this.export();
+        };
     }
 
     private loadBuildingDropdown(item?: Item) {
@@ -188,6 +193,21 @@ class App {
             }
         }
         this.update();
+    }
+
+    private export() {   
+        const filename = `${this.factory.name || 'factory'}.json`;
+        const content = JSON.stringify(
+            Factory.serializer.toJSON(this.factory),
+            null,
+            2
+        );
+        const file = new Blob([content], { type: 'application/json'});
+        const link = dom(document.body).create('a');
+        link.download = filename;
+        link.href = URL.createObjectURL(file);
+        link.click();
+        link.remove();
     }
 
     private clearData() {
