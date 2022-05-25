@@ -51,6 +51,11 @@ class App {
         exportBtn.onclick = () => {
             this.export();
         };
+
+        const importBtn = dom().id<HTMLButtonElement>('load-from-file');
+        importBtn.onclick = () => {
+            this.import();
+        };
     }
 
     private loadBuildingDropdown(item?: Item) {
@@ -208,6 +213,28 @@ class App {
         link.href = URL.createObjectURL(file);
         link.click();
         link.remove();
+    }
+
+    private import() {
+        const input = dom(document.body).create('input', {
+            attributes: {
+                type: 'file',
+                style: 'display: none;'
+            }
+        });
+        input.onchange = () => {
+            const reader = new FileReader();
+            reader.onload = () => {
+                const content = reader.result;
+                this.factory = Factory.serializer.fromJSON(
+                    JSON.parse(content.toString())
+                );
+                input.remove();
+                this.update();
+            };
+            reader.readAsText(input.files[0]);
+        };
+        input.click();
     }
 
     private clearData() {
