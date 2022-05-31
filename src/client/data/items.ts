@@ -89,6 +89,7 @@ export enum Item {
     RifleCartridge = "Rifle Cartridge",
     Rotor = "Rotor",
     Rubber = "Rubber",
+    SAMOre = "SAM Ore",
     Screw = "Screw",
     Silica = "Silica",
     SmartPlating = "Smart Plating",

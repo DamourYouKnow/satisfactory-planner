@@ -296,6 +296,123 @@ export const recipes: Recipe[] = [
         timeSeconds: 8
     },
     {
+        item: Item.Bauxite,
+        name: "Impure Bauxite Mk.1",
+        building: Building.MinerMk1,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Bauxite,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 2
+    },
+    {
+        item: Item.Bauxite,
+        name: "Normal Bauxite Mk.1",
+        building: Building.MinerMk1,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Bauxite,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 1
+    },
+    {
+        item: Item.Bauxite,
+        name: "Pure Bauxite Mk.1",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Bauxite,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.5
+    },
+    {
+        item: Item.Bauxite,
+        name: "Impure Bauxite Mk.2",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Bauxite,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 1
+    },
+    {
+        item: Item.Bauxite,
+        name: "Normal Bauxite Mk.2",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Bauxite,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.5
+    },
+    {
+        item: Item.Bauxite,
+        name: "Pure Bauxite Mk.2",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Bauxite,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.25
+    },
+    {
+        item: Item.Bauxite,
+        name: "Impure Bauxite Mk.3",
+        building: Building.MinerMk3,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Bauxite,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.5
+    },
+    {
+        item: Item.Bauxite,
+        name: "Normal Bauxite Mk.3",
+        building: Building.MinerMk3,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Bauxite,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.25
+    },
+    {
+        item: Item.Bauxite,
+        name: "Pure Bauxite Mk.3",
+        building: Building.MinerMk3,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Bauxite,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.125
+    },
+    {
         item: Item.Beacon,
         name: "Beacon",
         building: Building.Manufacturer,
@@ -610,6 +727,123 @@ export const recipes: Recipe[] = [
         timeSeconds: 5
     },
     {
+        item: Item.CateriumOre,
+        name: "Impure Caterium Ore Mk.1",
+        building: Building.MinerMk1,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.CateriumOre,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 2
+    },
+    {
+        item: Item.CateriumOre,
+        name: "Normal Caterium Ore Mk.1",
+        building: Building.MinerMk1,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.CateriumOre,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 1
+    },
+    {
+        item: Item.CateriumOre,
+        name: "Pure Caterium Ore Mk.1",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.CateriumOre,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.5
+    },
+    {
+        item: Item.CateriumOre,
+        name: "Impure Caterium Ore Mk.2",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.CateriumOre,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 1
+    },
+    {
+        item: Item.CateriumOre,
+        name: "Normal Caterium Ore Mk.2",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.CateriumOre,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.5
+    },
+    {
+        item: Item.CateriumOre,
+        name: "Pure Caterium Ore Mk.2",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.CateriumOre,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.25
+    },
+    {
+        item: Item.CateriumOre,
+        name: "Impure Caterium Ore Mk.3",
+        building: Building.MinerMk3,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.CateriumOre,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.5
+    },
+    {
+        item: Item.CateriumOre,
+        name: "Normal Caterium Ore Mk.3",
+        building: Building.MinerMk3,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.CateriumOre,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.25
+    },
+    {
+        item: Item.CateriumOre,
+        name: "Pure Caterium Ore Mk.3",
+        building: Building.MinerMk3,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.CateriumOre,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.125
+    },
+    {
         item: Item.CircuitBoard,
         name: "Circuit Board",
         building: Building.Assembler,
@@ -731,9 +965,7 @@ export const recipes: Recipe[] = [
         item: Item.Coal,
         name: "Pure Coal Mk1",
         building: Building.MinerMk1,
-        inputs: [
-
-        ],
+        inputs: [],
         outputs: [
             {
                 item: Item.Coal,
@@ -741,6 +973,84 @@ export const recipes: Recipe[] = [
             }
         ],
         timeSeconds: 0.5
+    },
+    {
+        item: Item.Coal,
+        name: "Impure Coal Mk2",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Coal,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 1,
+    },
+    {
+        item: Item.Coal,
+        name: "Normal Coal Mk2",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Coal,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.5
+    },
+    {
+        item: Item.Coal,
+        name: "Pure Coal Mk2",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Coal,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.25
+    },
+    {
+        item: Item.Coal,
+        name: "Impure Coal Mk3",
+        building: Building.MinerMk3,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Coal,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.5
+    },
+    {
+        item: Item.Coal,
+        name: "Normal Coal Mk3",
+        building: Building.MinerMk3,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Coal,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.25
+    },
+    {
+        item: Item.Coal,
+        name: "Pure Coal Mk3",
+        building: Building.MinerMk3,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Coal,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.125
     },
     {
         item: Item.Coal,
@@ -1081,6 +1391,123 @@ export const recipes: Recipe[] = [
         timeSeconds: 24
     },
     {
+        item: Item.CopperOre,
+        name: "Impure Copper Ore Mk.1",
+        building: Building.MinerMk1,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.CopperOre,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 2
+    },
+    {
+        item: Item.CopperOre,
+        name: "Normal Copper Ore Mk.1",
+        building: Building.MinerMk1,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.CopperOre,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 1
+    },
+    {
+        item: Item.CopperOre,
+        name: "Pure Copper Ore Mk.1",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.CopperOre,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.5
+    },
+    {
+        item: Item.CopperOre,
+        name: "Impure Copper Ore Mk.2",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.CopperOre,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 1
+    },
+    {
+        item: Item.CopperOre,
+        name: "Normal Copper Ore Mk.2",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.CopperOre,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.5
+    },
+    {
+        item: Item.CopperOre,
+        name: "Pure Copper Ore Mk.2",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.CopperOre,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.25
+    },
+    {
+        item: Item.CopperOre,
+        name: "Impure Copper Ore Mk.3",
+        building: Building.MinerMk3,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.CopperOre,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.5
+    },
+    {
+        item: Item.CopperOre,
+        name: "Normal Copper Ore Mk.3",
+        building: Building.MinerMk3,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.CopperOre,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.25
+    },
+    {
+        item: Item.CopperOre,
+        name: "Pure Copper Ore Mk.3",
+        building: Building.MinerMk3,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.CopperOre,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.125
+    },
+    {
         item: Item.CopperPowder,
         name: "Copper Powder",
         building: Building.Constructor,
@@ -1140,18 +1567,42 @@ export const recipes: Recipe[] = [
     },
     {
         item: Item.CrudeOil,
-        name: "Crude Oil",
+        name: "Impure Crude Oil",
         building: Building.OilExtractor,
-        inputs: [
-
-        ],
+        inputs: [],
         outputs: [
             {
                 item: Item.CrudeOil,
-                quantity: 2
+                quantity: 1
             }
         ],
         timeSeconds: 1
+    },
+    {
+        item: Item.CrudeOil,
+        name: "Normal Crude Oil",
+        building: Building.OilExtractor,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.CrudeOil,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.5
+    },
+    {
+        item: Item.CrudeOil,
+        name: "Pure Crude Oil",
+        building: Building.OilExtractor,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.CrudeOil,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.25
     },
     {
         item: Item.CrudeOil,
@@ -2309,6 +2760,123 @@ export const recipes: Recipe[] = [
         timeSeconds: 5
     },
     {
+        item: Item.Limestone,
+        name: "Impure Limestone Mk.1",
+        building: Building.MinerMk1,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Limestone,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 2
+    },
+    {
+        item: Item.Limestone,
+        name: "Normal Limestone Mk.1",
+        building: Building.MinerMk1,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Limestone,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 1
+    },
+    {
+        item: Item.Limestone,
+        name: "Pure Limestone Mk.1",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Limestone,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.5
+    },
+    {
+        item: Item.Limestone,
+        name: "Impure Limestone Mk.2",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Limestone,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 1
+    },
+    {
+        item: Item.Limestone,
+        name: "Normal Limestone Mk.2",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Limestone,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.5
+    },
+    {
+        item: Item.Limestone,
+        name: "Pure Limestone Mk.2",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Limestone,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.25
+    },
+    {
+        item: Item.Limestone,
+        name: "Impure Limestone Mk.3",
+        building: Building.MinerMk3,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Limestone,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.5
+    },
+    {
+        item: Item.Limestone,
+        name: "Normal Limestone Mk.3",
+        building: Building.MinerMk3,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Limestone,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.25
+    },
+    {
+        item: Item.Limestone,
+        name: "Pure Limestone Mk.3",
+        building: Building.MinerMk3,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Limestone,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.125
+    },
+    {
         item: Item.MagneticFieldGenerator,
         name: "Magnetic Field Generator",
         building: Building.Manufacturer,
@@ -3313,6 +3881,123 @@ export const recipes: Recipe[] = [
         timeSeconds: 16
     },
     {
+        item: Item.RawQuartz,
+        name: "Impure Raw Quartz Mk.1",
+        building: Building.MinerMk1,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.RawQuartz,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 2
+    },
+    {
+        item: Item.RawQuartz,
+        name: "Normal Raw Quartz Mk.1",
+        building: Building.MinerMk1,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.RawQuartz,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 1
+    },
+    {
+        item: Item.RawQuartz,
+        name: "Pure Raw Quartz Mk.1",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.RawQuartz,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.5
+    },
+    {
+        item: Item.RawQuartz,
+        name: "Impure Raw Quartz Mk.2",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.RawQuartz,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 1
+    },
+    {
+        item: Item.RawQuartz,
+        name: "Normal Raw Quartz Mk.2",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.RawQuartz,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.5
+    },
+    {
+        item: Item.RawQuartz,
+        name: "Pure Raw Quartz Mk.2",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.RawQuartz,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.25
+    },
+    {
+        item: Item.RawQuartz,
+        name: "Impure Raw Quartz Mk.3",
+        building: Building.MinerMk3,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.RawQuartz,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.5
+    },
+    {
+        item: Item.RawQuartz,
+        name: "Normal Raw Quartz Mk.3",
+        building: Building.MinerMk3,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.RawQuartz,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.25
+    },
+    {
+        item: Item.RawQuartz,
+        name: "Pure Raw Quartz Mk.3",
+        building: Building.MinerMk3,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.RawQuartz,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.125
+    },
+    {
         item: Item.ReinforcedIronPlate,
         name: "Reinforced Iron Plate",
         building: Building.Assembler,
@@ -3561,6 +4246,123 @@ export const recipes: Recipe[] = [
             }
         ],
         timeSeconds: 12
+    },
+    {
+        item: Item.SAMOre,
+        name: "Impure SAM Ore Mk.1",
+        building: Building.MinerMk1,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.SAMOre,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 2
+    },
+    {
+        item: Item.SAMOre,
+        name: "Normal SAM Ore Mk.1",
+        building: Building.MinerMk1,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.SAMOre,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 1
+    },
+    {
+        item: Item.SAMOre,
+        name: "Pure SAM Ore Mk.1",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.SAMOre,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.5
+    },
+    {
+        item: Item.SAMOre,
+        name: "Impure SAM Ore Mk.2",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.SAMOre,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 1
+    },
+    {
+        item: Item.SAMOre,
+        name: "Normal SAM Ore Mk.2",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.SAMOre,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.5
+    },
+    {
+        item: Item.SAMOre,
+        name: "Pure SAM Ore Mk.2",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.SAMOre,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.25
+    },
+    {
+        item: Item.SAMOre,
+        name: "Impure SAM Ore Mk.3",
+        building: Building.MinerMk3,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.SAMOre,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.5
+    },
+    {
+        item: Item.SAMOre,
+        name: "Normal SAM Ore Mk.3",
+        building: Building.MinerMk3,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.SAMOre,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.25
+    },
+    {
+        item: Item.SAMOre,
+        name: "Pure SAM Ore Mk.3",
+        building: Building.MinerMk3,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.SAMOre,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.125
     },
     {
         item: Item.Screw,
@@ -3935,6 +4737,123 @@ export const recipes: Recipe[] = [
         timeSeconds: 6
     },
     {
+        item: Item.Sulfur,
+        name: "Impure Sulfur Mk.1",
+        building: Building.MinerMk1,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Sulfur,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 2
+    },
+    {
+        item: Item.Sulfur,
+        name: "Normal Sulfur Mk.1",
+        building: Building.MinerMk1,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Sulfur,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 1
+    },
+    {
+        item: Item.Sulfur,
+        name: "Pure Sulfur Mk.1",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Sulfur,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.5
+    },
+    {
+        item: Item.Sulfur,
+        name: "Impure Sulfur Mk.2",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Sulfur,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 1
+    },
+    {
+        item: Item.Sulfur,
+        name: "Normal Sulfur Mk.2",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Sulfur,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.5
+    },
+    {
+        item: Item.Sulfur,
+        name: "Pure Sulfur Mk.2",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Sulfur,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.25
+    },
+    {
+        item: Item.Sulfur,
+        name: "Impure Sulfur Mk.3",
+        building: Building.MinerMk3,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Sulfur,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.5
+    },
+    {
+        item: Item.Sulfur,
+        name: "Normal Sulfur Mk.3",
+        building: Building.MinerMk3,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Sulfur,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.25
+    },
+    {
+        item: Item.Sulfur,
+        name: "Pure Sulfur Mk.3",
+        building: Building.MinerMk3,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Sulfur,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.125
+    },
+    {
         item: Item.Supercomputer,
         name: "Supercomputer",
         building: Building.Manufacturer,
@@ -4231,6 +5150,123 @@ export const recipes: Recipe[] = [
             }
         ],
         timeSeconds: 8
+    },
+    {
+        item: Item.Uranium,
+        name: "Impure Uranium Mk.1",
+        building: Building.MinerMk1,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Uranium,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 2
+    },
+    {
+        item: Item.Uranium,
+        name: "Normal Uranium Mk.1",
+        building: Building.MinerMk1,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Uranium,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 1
+    },
+    {
+        item: Item.Uranium,
+        name: "Pure Uranium Mk.1",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Uranium,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.5
+    },
+    {
+        item: Item.Uranium,
+        name: "Impure Uranium Mk.2",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Uranium,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 1
+    },
+    {
+        item: Item.Uranium,
+        name: "Normal Uranium Mk.2",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Uranium,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.5
+    },
+    {
+        item: Item.Uranium,
+        name: "Pure Uranium Mk.2",
+        building: Building.MinerMk2,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Uranium,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.25
+    },
+    {
+        item: Item.Uranium,
+        name: "Impure Uranium Mk.3",
+        building: Building.MinerMk3,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Uranium,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.5
+    },
+    {
+        item: Item.Uranium,
+        name: "Normal Uranium Mk.3",
+        building: Building.MinerMk3,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Uranium,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.25
+    },
+    {
+        item: Item.Uranium,
+        name: "Pure Uranium Mk.3",
+        building: Building.MinerMk3,
+        inputs: [],
+        outputs: [
+            {
+                item: Item.Uranium,
+                quantity: 1
+            }
+        ],
+        timeSeconds: 0.125
     },
     {
         item: Item.UraniumFuelRod,
