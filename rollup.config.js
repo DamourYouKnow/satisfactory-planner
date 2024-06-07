@@ -2,7 +2,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import { babel } from '@rollup/plugin-babel';
-import { terser } from 'rollup-plugin-terser';
+import terser from '@rollup/plugin-terser';
 import { DEFAULT_EXTENSIONS } from '@babel/core';
 
 export default function() {
@@ -22,22 +22,21 @@ export default function() {
             resolve({browser: true}),
             commonjs(),
             typescript({
-                target: 'es2017',
+                target: 'es6',
                 sourceMap: !prod,
                 inlineSourceMap: !prod,
-                inlineSources: !prod,
-                allowSyntheticDefaultImports: true
+                inlineSources: !prod
             }),
             babel({
-                exclude: ['*.html', '**/node_modules/**'],
+                exclude: ['*.html'],
                 extensions: [
                     ...DEFAULT_EXTENSIONS,
                     '.ts',
                     '.tsx'
                 ],
-                babelHelpers: 'runtime'
+                babelHelpers: 'bundled'
             }),
             ...(prod ? [terser()] : [])
         ],
-    }
-};
+    };
+}
